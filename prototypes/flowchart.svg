@@ -1,0 +1,198 @@
+<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+  <title>Connector Demo</title>
+  <desc>Alternate description</desc>
+  <metadata>author: schepers, created: 12-10-2009</metadata>
+
+  <script id="connectorLibrary" xlink:href="connector.js" type="text/ecmascript"/>
+
+  <defs>
+    <linearGradient id="fade" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#90a4be" />
+      <stop offset="1" stop-color="#b0c4de" />
+    </linearGradient>
+    
+    <circle id="type1" cx="0" cy="0" r="20" stroke-width="3"/>
+
+    <marker id="arrow" viewBox="-13 -6 15 12"
+            refX="0" refY="0" markerWidth="8" markerHeight="16" orient="auto">
+      <path d="M-10,-5 L0,0 -10,5 Z" stroke="black" fill="black" stroke-linejoin="round" stroke-linecap="round"/>
+    </marker>
+
+
+    <g id="stateNode" class="node" transform="translate(0,0)">
+      <ellipse cx="0" cy="0" rx="65" ry="40"/>
+      <text fill="black" stroke="none" text-anchor="middle" x="0" y="-9">state <tspan text-anchor="middle" x="0" y="5" font-family="Verdana, Arial">label</tspan> <tspan text-anchor="middle" x="0" y="20" font-family="Verdana, Arial">label?</tspan></text>
+    </g>
+
+    <g id="decisionNode" class="node" transform="translate(0,0)">
+      <polygon points="0,-40 65,0 0,40 -65,0"/>
+      <text fill="black" stroke="none" text-anchor="middle" x="0" y="-9">decision <tspan text-anchor="middle" x="0" y="5" font-family="Verdana, Arial">label</tspan> <tspan text-anchor="middle" x="0" y="20" font-family="Verdana, Arial">label?</tspan></text>
+    </g>
+    
+    <g id="itemNode" class="node" transform="translate(0,0)">
+      <rect x="-65" y="-40" width="130" height="80"/>
+      <text fill="black" stroke="none" text-anchor="middle" x="0" y="-9">item <tspan text-anchor="middle" x="0" y="5" font-family="Verdana, Arial">label</tspan> <tspan text-anchor="middle" x="0" y="20" font-family="Verdana, Arial">label?</tspan></text>
+    </g>
+
+		<g id="resultNode" class="node" transform="translate(0,0)">
+			<polygon points="-45,-40 85,-40 45,40 -85,40"/>
+      <text fill="black" stroke="none" text-anchor="middle" x="0" y="-9">result <tspan text-anchor="middle" x="0" y="5" font-family="Verdana, Arial">label</tspan> <tspan text-anchor="middle" x="0" y="20" font-family="Verdana, Arial">label?</tspan></text>
+		</g>
+
+
+
+    <rect id="terminal" x="-62.5" y="-23" width="125" height="46" rx="23" ry="23">
+      <title>Terminal Symbol</title>
+      <desc>The terminal symbol indicates a starting or stopping point in the logic.  Every flowchart should start and end with one or more terminal symbols.</desc>
+      <point role="port" x="0" y="-23"/>
+      <point role="port" x="-62.5" y="0"/>
+      <point role="port" x="0" y="23"/>
+      <point role="port" x="62.5" y="0"/>
+    </rect>
+
+    <polygon id="input-output" points="-37.5,-28.5 67.5,-28.5 37.5,28.5 -67.5,28.5">
+      <title>Input/Output Symbol</title>
+      <desc>The input/output symbol represents any single process in an algorithm, such as reading input or writing output.</desc>
+      <point role="port" x="0" y="-28.5" />
+      <point role="port" x="-52.5" y="0" />
+      <point role="port" x="0" y="28.5" />
+      <point role="port" x="52.5" y="0" />
+    </polygon>  
+
+    <rect id="process" x="-53" y="-36" width="106" height="72">
+      <title>Process Symbol</title>
+      <desc>The process symbol represents any single process in an algorithm, such as assigning a value or performing a calculation.  The flow of control is sequential.</desc>
+      <point role="port" x="0" y="-36" />
+      <point role="port" x="-53" y="0" />
+      <point role="port" x="53" y="0" />
+      <point role="port" x="0" y="36" />
+    </rect>
+
+    <path id="predefined-process" d="M-60,-36 H60 V36 H-60 Z M-48,-36 V36 M48,-36 V36">
+      <title>Predefined Process Symbol</title>
+      <desc>The predefined process symbol represents a module in an algorithm - that is, a predefined process that has its own flowchart.</desc>
+      <point role="port" x="0" y="-36" />
+      <point role="port" x="-60" y="0" />
+      <point role="port" x="0" y="36" />
+      <point role="port" x="60" y="0" />
+    </path> 
+
+    <polygon id="decision" points="0,-45 70,0 0,45 -70,0">
+      <title>Decision Symbol</title>
+      <desc>The decision symbol represents a decision in the logic single involving the comparison of two values.  Alternative paths are followed, depending on whether the decision symbol is true or false.</desc>
+      <point role="port" x="0" y="-45" />
+      <point role="port" x="-70" y="0" />
+      <point role="port" x="0" y="45" />
+      <point role="port" x="70" y="0" />
+    </polygon>
+
+    <polygon id="preparation" points="-60,0 -30,-36 30,-36 60,0 30,36 -30,36">
+      <title>Preparation Symbol</title>
+      <desc>The preparation symbol symbol represents a step that establishes conditions for later steps, such as a set-up operation.</desc>
+      <point role="port" x="0" y="-36" />
+      <point role="port" x="-60" y="0" />
+      <point role="port" x="0" y="36" />
+      <point role="port" x="60" y="0" />
+    </polygon>
+
+    <circle id="connection" cx="0" cy="0" r="25">
+      <title>Connection Symbol</title>
+      <desc>The connection symbol symbol represents a jump from one point in the flow process to another, or between a sub-process and the parent process.</desc>
+      <point role="port" x="0" y="-25" />
+      <point role="port" x="17.68" y="-17.68" />
+      <point role="port" x="25" y="0" />
+      <point role="port" x="17.68" y="17.68" />
+      <point role="port" x="0" y="25" />
+      <point role="port" x="-17.68" y="17.68" />
+      <point role="port" x="-25" y="0" />
+      <point role="port" x="-17.68" y="-17.68" />
+    </circle>
+  </defs>
+  
+  <rect id="BackDrop" x="0" y="0" width="100%" height="100%" fill="none" pointer-events="all" stroke="black"/>
+
+  <g stroke="blue" stroke-width="2">
+    <connector id="t1-d1" n1="#t1" n2="#d1" n1port="port" n2port="port" directed="true" marker-end="url(#arrow)"/>  
+    <connector id="d1-io1" n1="#d1" n2="#io1" directed="true" marker-end="url(#arrow)"/>
+    <connector id="d1-p1" n1="#d1" n2="#p1" directed="true" marker-end="url(#arrow)"/>
+    <connector id="io1-pp1" n1="#io1" n2="#pp1" directed="true" marker-end="url(#arrow)"/>
+    <connector id="p1-t2" n1="#p1" n2="#t2" directed="true" marker-end="url(#arrow)"/>
+    <connector id="pp1-t3" n1="#pp1" n2="#t3" directed="true" marker-end="url(#arrow)"/>
+    <connector id="c1-io1" n1="#c1" n2="#io1" directed="false"/>
+    <connector id="c1-t3" n1="#c1" n2="#t3" directed="false"/>
+    <connector id="c1-pp1" n1="#c1" n2="#pp1" directed="false"/>
+  </g>
+
+  <g id="nodes">
+    <use id="t1" x="133" y="105" xlink:href="#terminal" fill="url(#fade)" stroke="#483d8b" focusable="true">
+      <title>Start</title>
+      <point id="t1-1" role="port" x="0" y="-23"/>
+      <point id="t1-2" role="port" x="-62.5" y="0"/>
+      <point id="t1-3" role="port" x="0" y="23"/>
+      <point id="t1-4" role="port" x="62.5" y="0"/>
+    </use>  
+    
+    <use id="d1" x="325" y="105" xlink:href="#decision" fill="url(#fade)" stroke="#483d8b" focusable="true">
+      <title>Decision</title>
+      <point id="d1-1" role="port" x="0" y="-45" />
+      <point id="d1-2" role="port" x="-70" y="0" />
+      <point id="d1-3" role="port" x="0" y="45" />
+      <point id="d1-4" role="port" x="70" y="0" />
+    </use>  
+    
+    <use id="io1" x="500" y="105" xlink:href="#input-output" fill="url(#fade)" stroke="#483d8b" focusable="true">
+      <title>Type an answer</title>
+      <point id="io1-1" role="port" x="0" y="-28.5" />
+      <point id="io1-2" role="port" x="-52.5" y="0" />
+      <point id="io1-3" role="port" x="0" y="28.5" />
+      <point id="io1-4" role="port" x="52.5" y="0" />
+    </use>  
+    
+    <use id="p1" x="325" y="235" xlink:href="#process" fill="url(#fade)" stroke="#483d8b" focusable="true">
+      <title>Automatic choice</title>
+      <point id="p1-1" role="port" x="0" y="-36" />
+      <point id="p1-2" role="port" x="-53" y="0" />
+      <point id="p1-3" role="port" x="53" y="0" />
+      <point id="p1-4" role="port" x="0" y="36" />
+    </use>  
+    
+    <use id="pp1" x="685" y="105" xlink:href="#predefined-process" fill="url(#fade)" stroke="#483d8b" focusable="true">
+      <title>Keyboard Events</title>
+      <point id="pp1-1" role="port" x="0" y="-36" />
+      <point id="pp1-2" role="port" x="-60" y="0" />
+      <point id="pp1-3" role="port" x="0" y="36" />
+      <point id="pp1-4" role="port" x="60" y="0" />
+    </use>  
+    
+    <use id="t2" x="325" y="360" xlink:href="#terminal" fill="url(#fade)" stroke="#483d8b" focusable="true">
+      <title>Successful End</title>
+      <point id="t2-1" role="port" x="0" y="-23"/>
+      <point id="t2-2" role="port" x="-62.5" y="0"/>
+      <point id="t2-3" role="port" x="0" y="23"/>
+      <point id="t2-4" role="port" x="62.5" y="0"/>
+    </use>  
+    
+    <use id="t3" x="685" y="365" xlink:href="#terminal" fill="url(#fade)" stroke="#483d8b" focusable="true">
+      <title>Failed End</title>
+      <point id="t3-1" role="port" x="0" y="-23"/>
+      <point id="t3-2" role="port" x="-62.5" y="0"/>
+      <point id="t3-3" role="port" x="0" y="23"/>
+      <point id="t3-4" role="port" x="62.5" y="0"/>
+    </use>  
+    
+    <use id="c1" x="500" y="205" xlink:href="#connection" fill="url(#fade)" stroke="#483d8b" focusable="true">
+      <title>Failed End</title>
+      <point id="c1-1" role="port" x="25" y="0" />
+      <point id="c1-2" role="port" x="17.68" y="17.68" />
+      <point id="c1-3" role="port" x="0" y="25" />
+      <point id="c1-4" role="port" x="-17.68" y="17.68" />
+      <point id="c1-5" role="port" x="-25" y="0" />
+      <point id="c1-6" role="port" x="-17.68" y="-17.68" />
+      <point id="c1-7" role="port" x="0" y="-25" />
+      <point id="c1-8" role="port" x="17.68" y="-17.68" />
+    </use>  
+    
+  </g>
+
+</svg>

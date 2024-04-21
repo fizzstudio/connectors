@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>TextArea</title>
+
+  <script type="text/javascript">
+    function GetValue () {
+      var area = document.getElementById ("input");
+      var val = area.value
+      console.info(val);
+
+      var node_array = [];
+
+      var lines = val.split("\n");
+
+      for (var c = 0, c_len = lines.length; c_len > c; ++c) {
+        var each_line = lines[c];
+        if ( -1 != each_line.indexOf("->") ) {
+          console.info(c, each_line);
+
+          var spaceless = each_line.replace(/;/g, "").replace(/\s/g, "");
+          console.info(c, spaceless);
+
+          var nodes = spaceless.split("->");
+          console.info(c, nodes);        
+          for (var n = 0, n_len = nodes.length; n_len > n - 1; ++n) {
+            var each_node = nodes[n];
+            if ( node_array[each_node] ) {
+              node_array[each_node].push(nodes[n+1]); 
+            } else {
+              node_array[each_node] = [ nodes[n+1] ]; 
+            } 
+          }
+        }
+
+
+      }
+      console.info( node_array);
+
+      var x = 0;
+      var y = 100;
+
+      for (var key in node_array) {
+        var obj = node_array[key];
+        x += 100;
+        // y += 100;
+        if ( 300 < x ) {
+          x = 100;
+          y += 100;
+        }
+        create_circle ( x, y, obj );
+      }
+
+    }
+
+
+function create_circle ( x, y, label ) {
+  var svgns = "http://www.w3.org/2000/svg";
+
+  var root = document.querySelector("svg");
+  var el = document.createElementNS(svgns, "circle");
+
+  el.setAttribute("cx", x );
+  el.setAttribute("cy", y );
+  el.setAttribute("r", 20 );
+  el.setAttribute("style", "stroke:purple; fill:purple; fill-opacity:0.5;" );
+
+  root.appendChild( el );
+}
+
+
+    function SetValue () {
+      var area = document.getElementById ("input");
+      area.value = "The new value";
+    }
+  </script>
+  <style type="text/css">
+    body {
+      background-color: gainsboro;
+    }
+
+    textarea, button {
+      display: block;
+      margin: 1em;
+    }
+
+    textarea {
+      min-width: 20em;
+      min-height: 30em;
+    }
+
+    svg {
+      width: 800px;
+      height: 800px;
+      outline: black;
+    }
+  </style>
+</head>
+<body>
+
+  <textarea id="input"/>
+digraph graphname {
+  a -> b -> c;
+  b -> d;
+}
+  </textarea>
+
+  <button onclick="GetValue ();">Get the velue of the textarea!</button>
+  <button onclick="SetValue ();">Modify the value of the textarea!</button>
+
+  <svg>
+    
+  </svg>
+</body>
+</html>

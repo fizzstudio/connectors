@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+	<title>Simple Graph Layout: Sentence Diagram</title>
+	<style>
+		body { background: black; font: 13px/13px helvetica, sans-serif; }
+		#canvas { display: block; margin: auto; width: 960px; height: 720px; border: #111 1px solid; }
+	</style>
+	<script type="text/javascript" src="grapher.js"></script>
+</head>
+<body>
+	<svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
+	<script type="text/javascript">
+		var g = new Graph("canvas", 960, 700 );
+
+		// reduce repulsion and spring length for more compact layout
+		g.repulsion = g.repulsion / 8;
+		g.spring_length = 1;
+		
+		g.create_node("time","#000066"); // set node color
+		g.create_node("flies");
+		g.create_node("like");
+		g.create_node("an");
+		g.create_node("arrow");
+		g.create_node("but");
+		g.create_node("fruit");
+		g.create_node("flies (2)");
+		g.create_node("like (2)");
+		g.create_node("a");
+		g.create_node("banana");
+		
+		g.create_connector("time","flies");
+		g.create_connector("flies","like");
+		g.create_connector("like","arrow");
+		g.create_connector("arrow","an");
+		g.create_connector("flies","but","stroke-dasharray: 2, 2; stroke: #666; stroke-width: 3;"); // custom edge style
+		g.create_connector("but","flies (2)");
+		g.create_connector("flies (2)","fruit");
+		g.create_connector("flies (2)","like (2)");
+		g.create_connector("like (2)","banana");
+		g.create_connector("banana","a");
+		g.go();
+	</script>
+</body>
+</html>

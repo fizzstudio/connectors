@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type"></meta>
+  <title>SVG <em>Template</em> Requirements</title>
+  <style type="text/css">
+
+      .designgoals {
+       list-style-type: decimal;
+      }
+
+      .req-level1 {
+       list-style-type: decimal;
+       font-weight: bold;
+      }
+
+      .req-level2 {
+       list-style-type: decimal;
+       font-weight: normal;
+      }
+
+      .req-level1 li {
+       margin-top: 1em;
+      }
+
+      .req-level2 li {
+       margin-top: 0em;
+      }
+
+      .label {
+       margin-top: 1em;
+      }
+
+      .comment {
+       background: #ffffaa;
+      }
+
+      .svgversion {
+       color: #336633;
+       font-weight: bold;
+      }
+
+      .term {
+       font-weight: bold;
+       color: #aa3333;
+      }
+
+      .issue {
+       color: #ff0000;
+      }
+
+      .template {
+       font-weight: normal;
+       color: gray;
+      }
+
+    </style>
+  
+<link rel="stylesheet" type="text/css" href="style/svg-style.css"/>
+<link rel="stylesheet" type="text/css" href="style/W3C-WD.css"/>
+</head>
+
+
+<body>
+
+
+<div class="head">
+<p><a href="http://www.w3.org/" title="Go to W3C Home Page"><img width="72" alt="W3C" src="http://www.w3.org/Icons/w3c_home" height="48"></img> </a> </p>
+
+<h1>SVG <em>Template</em> Requirements </h1>
+
+
+<h2 id="sec-title"> W3C Working Draft 23 July 2008</h2>
+
+<dl>
+  <dt>This version:</dt>
+    <dd>
+      <a href="http://www.w3.org/TR/2007/WD-SVGTemplateReqs-20070309/">http://www.w3.org/TR/2007/WD-SVGTemplateReqs-20070309/</a></dd>
+  <dt>Latest version:</dt>
+    <dd>
+      <a href="http://www.w3.org/TR/SVGTemplateReqs1/">http://www.w3.org/TR/SVGTemplateReqs1/</a></dd>
+  <dt>Editors </dt>
+	<dd>Editor Name, Organization Name &lt;<a href="mailto:editor@example.com">editor@example.com</a>&gt;</dd>
+</dl>
+
+<p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2003 <a href="http://www.w3.org/"><acronym title="World Wide Web Consortium">W3C</acronym></a><sup>®</sup> (<a href="http://www.lcs.mit.edu/"><acronym title="Massachusetts Institute of Technology">MIT</acronym></a>, <a href="http://www.ercim.org/"><acronym title="European Research Consortium for Informatics and Mathematics">ERCIM</acronym></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a>, <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-software">software licensing</a> rules apply.</p>
+</div>
+<hr></hr>
+
+<h2 id="sec-abstract"> Abstract</h2>
+
+
+<p>This document lists the design principles and requirements for the creation of a SVG specification related to <em>Template</em>s. </p>
+
+<h2 id="sec-status"> Status of this Document</h2>
+
+<p>This is a W3C Working Draft for review by W3C Members and other interested parties. It is a draft document and may be updated, replaced or made obsolete by other documents at any time. It is inappropriate to use W3C Working Drafts as reference material or to cite them as other than "work in progress". A list of current W3C Recommendations and other technical documents, including Working Drafts and Notes, can be found at <a href="http://www.w3.org/TR/">http://www.w3.org/TR/</a> </p>
+
+<p>This is the first release of the SVG <em>Template</em> Requirements. It is expected that this document will progress through a number of working drafts, including "Last Call", before being published in final form. </p>
+
+<p>This document was developed by the <a href="http://www.w3.org/Graphics/SVG/">Scalable Vector Graphics</a> (SVG) working group as part of the W3C <a href="http://www.w3.org/Graphics/Activity">Graphics Activity</a>. The authors of this document are the SVG Working Group members. </p>
+
+<p>Feedback on this document should be sent to the email list <a href="mailto:www-svg@w3.org">the public mailing list of the SVG Working Group</a> (<a href="http://lists.w3.org/Archives/Public/www-svg/">list archives</a>). To subscribe send an email to <code>www-svg-request@w3.org</code> with the word <code>subscribe</code> in the subject line. </p>
+
+<p>The latest information regarding <a href="http://www.w3.org/Graphics/SVG/Disclosures" rel="disclosures">patent disclosures</a> related to this document is available on the Web. As of this publication, the SVG Working Group are not aware of any royalty-bearing patents they believe to be essential to SVG. </p>
+
+<p><em>This section represents the status of this document at the time this version was published. It will become outdated if and when a new version is published. The latest status is maintained at the W3C. </em> </p>
+
+<h2>Contents</h2>
+<ul class="toc">
+<ul class="toc">
+<li>1 <a href="#sec-introduction">Introduction</a>
+</li>
+<li>2 <a href="#sec-terminology">Terminology</a>
+</li>
+<li>3 <a href="#sec-usage">Usage Scenarios</a>
+</li>
+<li>4 <a href="#sec-features">Special <em>Template</em> Considerations</a>
+</li>
+<li>5 <a href="#sec-requirements">Requirements</a>
+</li>
+<li>6 <a href="#sec-references">References</a>
+</li>
+<li>7 <a href="#">Author List</a>
+</li>
+</ul>
+</li>
+</ul>
+
+<div class="div1">
+<h2 id="sec-introduction">1 Introduction </h2>
+
+
+<p>The <a href="http://www.w3.org/TR/SVG11">SVG specification</a> is a W3C recommendation that describes two-dimensional graphics in XML. </p>
+</div>
+
+<div class="div1">
+<h2 id="sec-terminology">2 Terminology </h2>
+
+
+<p>The following key words and phrases used throughout this document are defined here for clarity. The terms Must, Should, and May are used to specify the extent to which an item is a requirement for the SVG working group in defining SVG. These recommendations should not be mistaken as a guide to implementors. </p>
+<ol>
+  <li><b>'Must'</b> means that the item is an absolute requirement. </li>
+  <li><b>'Should'</b> means that there may exist valid reasons in particular
+    circumstances to ignore the item, but the full implications must be understood and carefully weighed before choosing a different course. </li>
+  <li><b>'May' </b> means that item will be considered, but further examination is needed to determine if the item should be treated as a requirement. </li>
+  <li><b>'SVG' </b> refers to SVG in general without reference to any version or profile. </li>
+  <li><b>'SVG 1.0' </b> refers to the original SVG specification. </li>
+  <li><b>'SVG 1.1' </b> refers to the modularized version of SVG 1.0. </li>
+  <li><b>'SVG 1.2' </b> refers to the next release of SVG and is planned to reference this specification. </li>
+  <li><b>'SVG<em>Connector</em>' </b> refers to SVG <em>Connector</em>, an SVG specification for connectors between shapes. </li>
+</ol>
+</div>
+
+<div class="div1">
+<h2 id="sec-usage">3 Usage Scenarios </h2>
+
+
+<p>The following usage scenarios illustrate some of the ways in which SVG <em>Template</em>s might be used for various applications. </p>
+
+<p><b>Insert Use Case 1</b> Explain use case 1. </p>
+<p><b>Insert Use Case 2</b> Explain use case 2. </p>
+</div>
+
+<div class="div1">
+<h2 id="sec-features">4 Special Considerations for <em>Template</em></h2>
+
+<p><b>Memory and processor requirements</b> What are the requirements on memory or processing resources?</p>
+<p><b>Implementation commitments</b> How difficult, or what details are needed, for implementation?</p>
+<p><b>Ease of authoring</b> What considerations need to be borne in mind for authors?</p>
+
+</div>
+
+<div class="div1">
+<h2 id="sec-requirements">5 Requirements</h2>
+
+<ol class="req-level1">
+  <li>General Requirements 
+    <ol class="req-level2">
+      <li>point should be reusable</li>
+      <li>point should have absolute and relative positioning</li>
+      <li><span class="term">should</span> consider the case of SVG in HTML
+        <ul>
+          <li>what happens when a connector links to an element in another namespace (e.g. an HTML 'p')?  Does it draw a line?  If so, where does the line start or end (e.g. in the middle of the block, or one of the corners)?</li>
+          <li>should connectors only work when connected to SVG-namespaced elements?</li>
+        </ul>
+      </li>
+      <li class="template">Any valid SVG 1.1 <em>Template</em> <span class="term">must</span> be a valid SVGx <em>Template</em>. </li>
+      <li class="template">Conformance criteria for SVGx <span class="term">must</span> be produced. The criteria <span class="term">should</span> be separated into sections relevant to particular application types (eg. SVG files/document fragments, SVG generators, SVG viewers, SVG printers, etc.) </li>
+      <li class="template">Software or documents <span class="term">must</span> pass the relevant criteria to be able to claim conformance to the particular application type. </li>
+      <li class="template">A conformance test suite <span class="term">must</span> be developed for SVGx. The test suite must be made publicly available.  Conformance test suites for other uses of SVGx (e.g. prepress guidelines) <span class="term">may</span> be developed. </li>
+      <li class="template">A specification referencing SVGx <span class="term">must</span> declare if animations applies when a '<em>Template</em>' chain is in its scope.
+      </li>
+    </ol>
+  </li>
+  <li>Scripting 
+    <ol class="req-level2">
+      <li><span class="term">Must</span> include an API to allow authors to script custom routing for connectors
+        <ul>
+          <li><span class="term">May</span> include an interface on connector element to get active connection points, and all available nodes, along with their x and y positions.</li>
+        </ul>
+      </li>
+      <li class="template">A dynamic SVGx viewer <span class="term">must</span> support the SVGx scripting feature set. </li>
+    </ol>
+  </li>
+  <li class="template">Animation 
+    <ol class="req-level2">
+      <li class="template">A dynamic SVGx viewer <span class="term">must</span> support animation of all properties listed as animatable. </li>
+    </ol>
+  </li>
+  
+  <li>Out of Scope 
+    <ol class="req-level2">
+      <li>Specification <span class="term">must not</span> include automatic positioning of nodes
+        <ul>
+          <li>Authors <span class="term">must</span> lay out nodes manually or via script.</li>
+          <li>Specification <span class="term">should not</span> concept of "weight" for node or connector.</li>
+        </ul>
+      </li>
+      <li>Specification <span class="term">must not</span> include automatic routing of connector lines
+        <ul>
+          <li>Specification <span class="term">must not</span> include ability for connectors to automatically avoid intersection with other connectors or with intervening nodes.</li>
+        </ul>
+      </li>
+      <li>Specification <span class="term">must not</span> define automatic drag ’n’ drop of nodes
+        <ul>
+          <li>Authors <span class="term">may</span> enable drag ’n’ drop of nodes via script.</li>
+          <li>Specification <span class="term">should not</span> add x/y properties to compensation for transforms and viewboxes; this <span class="term">should</span> be defined in a different SVG specification.</li>
+        </ul>
+      </li>
+    </ol>
+  </li>
+</ol>
+</div>
+
+
+
+
+    
+  
+
+
+
+
+<div class="div1">
+<h2 id="sec-design_con">5 Design Considerations</h2>
+
+<dl class="req-level1">
+  <dt>Why include connectors in SVG?</dt>
+  <dd>Connectors have been on the list of requirements from the beginning of SVG, with <a href="http://www.w3.org/TR/1998/NOTE-WebSchematics">Web Schematics</a>, by David Duce and Bob Hopgood in 1998, which was one of the original input proposals for SVG.  Despite the large number and wide variety of real-world use cases that graphs solve, there have been no real common standard for graphs, and existing standards don't have a visual representation.  The lack of connectors harms accessibility, since connections depicted today are merely visual, not semantic or logical.  Finally, the introduction of connectors may help adoption of SVG for common users.</dd>        
+
+  <dt>Isn't this too high-level for SVG?</dt>
+  <dd>SVG has always resisted pressure to include "high-level" controls, such as form controls, and also specialized preset content such as a symbol library.  However, it has always included high-level functionality such as hyperlinks and declarative animation.  The specific set of features chosen for the Connector functionality was chosen for its relatively low implementation burden, general applicability, relative value for authors of SVG, and extensibility.
+    HTML provides form controls, such as buttons, option selectors, checkboxes, and so forth; it also includes tables, for the organization and layout of data.  SVG Connectors are intended to fill the equivalent graphical niche in SVG. 
+  </dd>
+  
+  
+
+  <dt>Is there author or user demand for such features?</dt>
+  <dd>Yes.  Most graphical authoring tools (including Inkscape) supply some sort of dynamic connector line, and there are several applications dedicated to that specific purpose.  There are also many applications that generate visual output from logical graphs.  Common SVG script libraries such as Raphäel include simple connectors, and these are commonly used as part of navigation controls.</dd>
+
+
+  <dt>Is this compatible with existing authoring tools and technologies?</dt>
+  <dd>Yes.  Because SVG Connectors defines a high-level abstraction and allows for customized</dd>
+
+  <dt>Isn't there a risk that this will be too powerful or not powerful enough to solve real-world problems?</dt>
+  <dd> </dd>
+
+
+  <dt>Is the connector element, and the automatic line updating, subject to misuse or abuse?</dt>
+  <dd>Not really.  A connector is a general concept, meant to indicate any kind of connection between two shapes or objects.  Any use of a connector is appropriate, because it will necessarily indicate a relationship between those two things; a wide variety of uses is encouraged.  Obviously, any additional semantic data, such as RDFa markup or titles, should be used appropriately as well.
+  For large sets of data, with many connectors, there may be a performance cost, however, so connectors should be used with that in mind.  
+  </dd>
+  
+  <dt>?</dt>
+  <dd> </dd>
+
+  <dt>Shouldn't the semantics and behavior be separated?</dt>
+  <dd>There is a well-established web-language design principle against the use of "invisible metadata"—that is, metadata that is not presented to the majority of users; for example, ... .  Separating the relationship of two objects from its visual representation means that it is less usable by most users, and that the metadata is less likely to be maintained in a consistent and correct way; equally, a simple visual line between two shapes cannot reliably be assumed to imply a connection.  The visual, semantic, and behavioral aspects to the connector encourage the proper use of the format, rewarding authors for making their content accessible and reusable.</dd>
+
+
+  <dt>Why not simply add a 'connector' role to other shapes, such as the 'path' element?  Why introduce a new element?</dt>
+  <dd>The 'role' attribute was not designed to change the behavior of an element</dd>
+
+
+  <dt>What are the performance costs?  Will this require tracking dependency chains?</dt>
+  <dd>Yes, each connector must reflect the current position of each of its nodes, and the ports within that node.  Until we have native implementations, and examples and tests of documents with a range of numbers of connectors, the precise performance costs are not clear.   Early experiments with relatively simple examples in a javascript prototype did not seem to suffer from performance issues or excessive memory usage.</dd>
+
+  <dt>Can the 'point' element be used for other purposes?</dt>
+  <dd>Yes.  The 'point' element is intended as a general-purpose element, and can be used without the 'connector' element for any desired reason, such as a point of interest on a map, or an animated reference point for layout.  It is introduced in this specification merely for convenience.</dd>
+
+  <dt>Why not rely on a script library?  Why put this in SVG?</dt>
+  <dd> </dd>
+
+  <dt>What about existing modern and legacy SVG user agents which don't support connectors?  How will they treat an SVG file which uses them?</dt>
+  <dd></dd>
+
+
+</dl>
+</div>
+
+<div class="div1">
+<h2 id="sec-references">7 References</h2>
+
+<dl class="references">
+  <dt class="label"><a name="ref-svg"></a>SVG 1.1</dt>
+    <dd><em>Scalable Vector Graphics (SVG) 1.1 Specification</em>, Jon Ferraiolo, Jun Fujisawa, Dean Jackson, editors, W3C, 14 January 2003 (Recommendation). See <a href="http://www.w3.org/TR/SVG11/">http://www.w3.org/TR/SVG11/</a> </dd>
+  <dt class="label"><a name="ref-svgreqs"></a>SVG 1.1/1.2/2.0 Requirements</dt>
+    <dd><em>SVG 1.1/1.2/2.0 Requirements Document</em>, Dean Jackson, editor, W3C, 22 April 2002. See <a href="http://www.w3.org/TR/SVG2Reqs/">http://www.w3.org/TR/SVG2Reqs/</a>
+    </dd>
+  <dt class="label"><a name="ref-svgmobilereqs"></a>Mobile SVG Profiles</dt>
+    <dd><em>Mobile SVG Profiles: SVG Tiny and SVG Basic</em>, Tolga Capin, editor, W3C, 14 January 2003 (Recommendation). See <a href="http://www.w3.org/TR/SVGMobile">http://www.w3.org/TR/SVGMobile</a>
+    </dd>
+</dl>
+</div>
+<hr class="xhtml"></hr>
+
+<h2>8 <a id="sec-authorlist" name="sec-authorlist">Author List</a> </h2>
+
+
+<p>The authors of this specification are the participants of the W3C SVG
+Working Group.</p>
+<dl>
+  <dt>Authors:</dt>
+    <dd><ul>
+        <li class="template"></li>
+      </ul>
+    </dd>
+</dl>
+<h2>9 <a id="sec-notes">Notes</a> </h2>
+
+<pre>
+  Connectors
+
+  DS: we have in the past talked about this
+  ... i want to briefly go over some use cases for connectors
+  ... and details
+  ... we've avoided connectors because you can graphically represent something connecting something else
+  ... but it doesn't have a logical connection
+  ... there are a lot of use cases for things that are logically connected
+  ... circuit diagrams, flow chart diagrams, any kind of node-edge graph
+  ... we've avoided them in the same way as avoiding default symbols
+  ... so connectors could also be used for representing roads, or any kinds of routes through some thing
+  ... i think the class of uses for these things is large
+
+  ED: xlink:href on every element?
+
+  DS: there are a number of approaches
+  ... i think the basic idea is that there are two aspects to it
+  ... one, a logical connection, between two elements which represent two different objects
+  ... and one is a physical connection
+  ... an obvious thing people would like to do is [draws on board]
+  ... [two circles connected by a line, moving one circle should make the line follow it]
+  ... that could be done in the very simplest case, but i don't think people are going to want  
+      to do something where the line has to wrap around another shape, for example
+  ... implementors aren't going to want to solve that case
+  ... edge routing
+  ... but i think there is still a lot of utility in straight line connections
+  ... in the future, potentially allowing the author to say "go through this point" when routing
+
+  CL: this needs to be a new curve type?
+
+  DS: could be just straight lines
+  ... solve many use cases, not all
+
+  CL: curves that pass through particular points we've come up against before, so perhaps we want to add them
+
+  DS: making a rendering element is one aspect of the problem
+  ... making a logical one is another aspect
+  ... so are these connections directed, undirected?
+  ... that's part of the logical aspect of it
+  ... another part is "what is the relationship itself"
+  ... e.g. does that mean parent--child relationship, or what
+  ... that might be represented as a form of metadata, like rdf
+  ... or it might be, for a UI, some textual equivalent of that equivalent
+  ... if i'm following a map, so you walk from the subway stop to the building
+  ... maybe the metadata is "walk from from subway stop to building"
+  ... how would you express that? maybe you'd have a &lt;title&gt; element
+  ... how do you represent the connector
+  ... i'm positing that we need a 'connector' element
+  ... what characterstics does it have?
+  ... it has a from and a to
+  ... so a connector, as i see it, is a special form of path that doesn't have a fill
+  ... what i'm thinking is that it would take path syntax so that if you wanted to do your own routing, 
+      you could say this is what it looks like
+  ... another way i thought of doing this would be to have role="connector" on a path
+  ... and that would mean logically that it is a connector
+  ... if connector weren't implemented, you could represent it as a path
+  ... what is the role of a connector? either as a separate element or a path
+  ... it's to present to a user to go from one thing to another
+  ... pretend we are in a flow chart, and we're navigating around it
+
+  [draws on board]
+
+  scribe: if you're in one node, and you want to navigate to another node that is connected from that one
+  ... the tilte of connectors could be read out, for example
+  ... and the user could choose
+  ... or maybe it's a popup that lets the user see what the relationship is
+  ... in terms of navigating documents in a logical order, a blind person could query the connector to find out where it's going
+  ... so they could step through a complex diagram
+  ... one use case i've seen for this is that they wanted to have all of their wiring diagrams for cars as svg files
+  ... apparently in japan, wiring diagrams for cars are done in svg
+  ... so when a mechanic is trying to sort out "is this circuit live or not", we set up a little animation 
+      to show them if they clicked a button which connectors are active
+  ... so in this scenario you might write a state machine and enable/disable certain connectors
+  ... it would be an accessible way to present these diagrams
+  ... right now, if i were navigating these elements, in 1.2T we could use the nav-* properties
+  ... but they only solve a physical case
+  ... with the connectors they define implicit navigation options
+  ... maybe its role would indicate the direction of the connector
+  ... so there's also a visual aspect of the problem
+  ... we should reuse existing path syntax, so if a person wants to do custom routing they can
+  ... failing that, it would just be a direct line
+  ... but when they use a direct line, dragging this element, the line would follow
+  ... so either you would take advantage of the auto routing, which would be a straight line in the first version, 
+      or you would write your own path
+  ... but you always get the logical connection
+  ... in later versions you could provide some way to tell it to do routing
+  ... there are two problems with diagrams like this
+  ... one is the line routing
+  ... the second is the node placement
+  ... we're also not going to solve that, unless it gets solved in the bounds of some layout algorithm
+  ... e.g. cameron's layout might take care of that
+
+  CL: you're not just going to point at an object, but then you to say i'm going from this point to this other point
+
+  AG: you could specify the endpoints as bounding box percentages
+
+  DS: i'm not sure that's going be satisfying
+  ... e.g. on a diamond shape, you don't want connecting lines going to one of its sides
+  ... so not necessarily the shortest path
+  ... we've already thought of the idea of svg point elements
+  ... it could act as an anchor point
+  ... so what if we defined the anchor points of children of the element
+
+  AG: how do you associate the connectors with an object?
+  ... i was thinking they might be a child
+
+  DS: can't be a child of two elements though
+  ... they can be in their own block somewhere
+  ... you can name the point you want to connect to
+  ... the default might be to choose the shortest path between the possible anchor points on the shapes
+  ... you could name these anchors and identify them explicitly
+
+  AG: could you have free floating svg:points?
+
+  DS: in future versions
+
+  AG: many-to-many connections?
+
+  DS: no, just one-to-one connections
+
+  CM: i wonder if you ever want navigation that is different from what the connections indicate
+
+  <shepazu> as far as semantics of relationships, you should be able to extract a triple from this diagram
+
+  <shepazu> as far as navigation goes, they don't ahve to render, might be a better way to define meaningful navigation with titles/descs
+
+  <shepazu> rather than using nav-next/-prev attributes
+
+  RESOLUTION: We'll consider the connector proposal
+
+  <scribe> ACTION: Doug to write up the connector proposal [recorded in http://www.w3.org/2009/09/30-svg-minutes.html#action04]
+
+  <trackbot> Created ACTION-2681 - Write up the connector proposal [on Doug Schepers - due 2009-10-08].  
+</pre>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" 
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="100%" height="100%" 
+     viewBox="-100 -100 200 200">
+
+  <title>Flowchart Symbols</title>
+  <desc>Alternate description</desc>
+  <metadata>author: schepers, created: 12-10-2009</metadata>
+
+  <g id="symbols" stroke="black" fill="white" stroke-width="2">
+     
+    <rect id="terminal" x="-62.5" y="-23" width="125" height="46" rx="23" ry="23">
+      <title>Terminal Symbol</title>
+      <desc>The terminal symbol indicates a starting or stopping point in the logic.  Every flowchart should start and end with one or more terminal symbols.</desc>
+      <point role="port" x="0" y="-23"/>
+      <point role="port" x="-62.5" y="0"/>
+      <point role="port" x="0" y="23"/>
+      <point role="port" x="62.5" y="0"/>
+    </rect>
+    
+    <polygon id="input-output" points="-37.5,-28.5 67.5,-28.5 37.5,28.5 -67.5,28.5">
+      <title>Input/Output Symbol</title>
+      <desc>The input/output symbol represents any single process in an algorithm, such as reading input or writing output.</desc>
+      <point role="port" x="0" y="-28.5" />
+      <point role="port" x="-52.5" y="0" />
+      <point role="port" x="0" y="28.5" />
+      <point role="port" x="52.5" y="0" />
+    </polygon>  
+
+    <rect id="process" x="-53" y="-36" width="106" height="72">
+      <title>Process Symbol</title>
+      <desc>The process symbol symbol represents any single process in an algorithm, such as assigning a value or performing a calculation.  The flow of control is sequential.</desc>
+      <point role="port" x="0" y="-36" />
+      <point role="port" x="-53" y="0" />
+      <point role="port" x="53" y="0" />
+      <point role="port" x="0" y="36" />
+    </rect>
+
+    <path id="predefined-process" d="M-60,-36 H60 V36 H-60 Z M-48,-36 V36 M48,-36 V36">
+      <title>Predefined Process Symbol</title>
+      <desc>The predefined process symbol symbol represents a module in an algorithm - that is, a predefined process that has its own flowchart.</desc>
+      <point role="port" x="0" y="-36" />
+      <point role="port" x="-60" y="0" />
+      <point role="port" x="0" y="36" />
+      <point role="port" x="60" y="0" />
+    </path> 
+
+    <polygon id="decision" points="0,-45 70,0 0,45 -70,0">
+      <title>Decision Symbol</title>
+      <desc>The decision symbol symbol represents a decision in the logic single involving the comparison of two values.  Alternative paths are followed, depending on whether the decision symbol is true or false.</desc>
+      <point role="port" x="0" y="-45" />
+      <point role="port" x="-70" y="0" />
+      <point role="port" x="0" y="45" />
+      <point role="port" x="70" y="0" />
+    </polygon>
+
+
+    <polygon id="preparation" points="-60,0 -30,-36 30,-36 60,0 30,36 -30,36">
+      <title>Preparation Symbol</title>
+      <desc>The preparation symbol symbol represents a step that establishes conditions for later steps, such as a set-up operation.</desc>
+      <point role="port" x="0" y="-36" />
+      <point role="port" x="-60" y="0" />
+      <point role="port" x="0" y="36" />
+      <point role="port" x="60" y="0" />
+    </polygon>
+
+
+    <circle id="connection" cx="0" cy="0" r="25">
+      <title>Connection Symbol</title>
+      <desc>The connection symbol symbol represents a jump from one point in the flow process to another, or between a sub-process and the parent process.</desc>
+      <point role="port" x="0" y="-25" />
+      <point role="port" x="17.68" y="-17.68" />
+      <point role="port" x="25" y="0" />
+      <point role="port" x="17.68" y="17.68" />
+      <point role="port" x="0" y="25" />
+      <point role="port" x="-17.68" y="17.68" />
+      <point role="port" x="-25" y="0" />
+      <point role="port" x="-17.68" y="-17.68" />
+    </circle>
+
+
+    
+  </g>
+
+</svg>

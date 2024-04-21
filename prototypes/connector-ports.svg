@@ -1,0 +1,121 @@
+<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+  <title>Connector Demo</title>
+  <desc>Alternate description</desc>
+  <metadata>author: schepers, created: 12-10-2009</metadata>
+
+  <script id="connectorLibrary" xlink:href="connector.js" type="text/ecmascript"/>
+
+  <defs>
+    <linearGradient id="fade" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#90a4be" />
+      <stop offset="1" stop-color="#b0c4de" />
+    </linearGradient>
+    
+    <circle id="type1" cx="0" cy="0" r="20" stroke-width="3"/>
+
+    <rect id="portless" x="-20" y="-20" width="40" height="40" rx="3" ry="3"/>
+
+    <marker id="arrow" viewBox="-13 -6 15 12"
+            refX="0" refY="0" markerWidth="8" markerHeight="16" orient="auto">
+      <path d="M-10,-5 L0,0 -10,5 Z" stroke="black" fill="black" stroke-linejoin="round" stroke-linecap="round"/>
+    </marker>
+
+    <rect id="terminal" x="-62.5" y="-23" width="125" height="46" rx="23" ry="23">
+      <title>Terminal Symbol</title>
+      <desc>The terminal symbol indicates a starting or stopping point in the logic.  Every flowchart should start and end with one or more terminal symbols.</desc>
+      <point role="port" x="0" y="-23"/>
+      <point role="port" x="-62.5" y="0"/>
+      <point role="port" x="0" y="23"/>
+      <point role="port" x="62.5" y="0"/>
+    </rect>
+
+    <circle id="connection" cx="0" cy="0" r="25">
+      <title>Connection Symbol</title>
+      <desc>The connection symbol symbol represents a jump from one point in the flow process to another, or between a sub-process and the parent process.</desc>
+      <point role="port" x="0" y="-25" />
+      <point role="port" x="17.68" y="-17.68" />
+      <point role="port" x="25" y="0" />
+      <point role="port" x="17.68" y="17.68" />
+      <point role="port" x="0" y="25" />
+      <point role="port" x="-17.68" y="17.68" />
+      <point role="port" x="-25" y="0" />
+      <point role="port" x="-17.68" y="-17.68" />
+    </circle>
+
+    <g id="decision">
+      <polygon id="decision1" points="0,-45 70,0 0,45 -70,0">
+        <title>Decision Symbol</title>
+        <desc>The decision symbol symbol represents a decision in the logic single involving the comparison of two values.  Alternative paths are followed, depending on whether the decision symbol is true or false.</desc>
+        <point role="port" x="0" y="-45" />
+        <point role="port" x="-70" y="0" />
+        <point role="port" x="0" y="45" />
+        <point role="port" x="70" y="0" />
+      </polygon>
+      <circle cx="0" cy="-45" r="4" fill="yellow" stroke="blue" />
+      <circle cx="-70" cy="0" r="4" fill="yellow" stroke="blue" />
+      <circle cx="0" cy="45" r="4" fill="red" stroke="blue" />
+      <circle cx="70" cy="0" r="4" fill="yellow" stroke="blue" />
+    </g>
+    
+
+
+  </defs>
+  
+  <rect id="BackDrop" x="0" y="0" width="100%" height="100%" fill="none" pointer-events="all" stroke="black"/>
+
+  <g id="nodes">
+    <use id="t1" x="200" y="100" xlink:href="#terminal" fill="url(#fade)" stroke="#483d8b" focusable="true">
+      <title>Start</title>
+      <point id="t1-1" role="port" x="0" y="-23"/>
+      <point id="t1-2" role="port" x="-62.5" y="0"/>
+      <point id="t1-3" role="port" x="0" y="23"/>
+      <point id="t1-4" role="port" x="62.5" y="0"/>
+    </use>  
+
+    <use id="d1" x="500" y="100" xlink:href="#decision" fill="url(#fade)" stroke="#483d8b" focusable="true">
+      <title>Processor</title>
+      <point id="d1-1" role="port input" x="0" y="-45" />
+      <point id="d1-2" role="port input" x="-70" y="0" />
+      <point id="d1-3" role="port output" x="0" y="45" />
+      <point id="d1-4" role="port input" x="70" y="0" />
+    </use>  
+
+    <use id="c1" x="500" y="300" xlink:href="#connection" fill="url(#fade)" stroke="#483d8b" focusable="true">
+      <title>Might as well jump</title>
+      <point id="c1-1" role="port" x="25" y="0" />
+      <point id="c1-2" role="port" x="17.68" y="17.68" />
+      <point id="c1-3" role="port" x="0" y="25" />
+      <point id="c1-4" role="port" x="-17.68" y="17.68" />
+      <point id="c1-5" role="port" x="-25" y="0" />
+      <point id="c1-6" role="port" x="-17.68" y="-17.68" />
+      <point id="c1-7" role="port" x="0" y="-25" />
+      <point id="c1-8" role="port" x="17.68" y="-17.68" />
+    </use>  
+
+    <use id="p1" x="800" y="100" xlink:href="#portless" fill="url(#fade)" stroke="#483d8b" focusable="true">
+      <title>portless</title>
+      <point id="p1-1" role="port" x="-20" y="0"/>
+    </use>  
+    
+  </g>
+
+  <g stroke="blue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <connector id="t1-d1" n1="#t1" n2="#d1" n1port="port" n2port="input" directed="true" marker-end="url(#arrow)">
+      <title>To Decision</title>
+      <desc>Make up your mind!</desc>
+    </connector>  
+
+    <connector id="p1-d1" n1="#p1" n2="#d1" n1port="port"  directed="false" marker-end="url(#arrow)">
+      <title>Portless input</title>n2port="input"
+      <desc>Random input</desc>
+    </connector>  
+
+    <connector id="d1-c1" n1="#d1" n2="#c1" n1port="output" n2port="port" directed="true"
+       marker-end="url(#arrow)" stroke-dasharray="5,10">
+      <title>To Connection</title>
+      <desc>Follow the jump...</desc>
+    </connector>  
+  </g>
+
+</svg>
