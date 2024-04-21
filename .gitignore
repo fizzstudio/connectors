@@ -2,3 +2,4 @@ node_modules
 npm-debug.log
 .map
 _ignore
+.DS_Store
