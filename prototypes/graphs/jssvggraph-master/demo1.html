@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+	<title>Simple Graph Layout: Hedgepigs</title>
+	<style>
+		body { background: black; font: 13px/13px helvetica, sans-serif; }
+		#canvas { display: block; margin: auto; width: 960px; height: 720px; border: #111 1px solid; }
+	</style>
+	<script type="text/javascript" src="grapher.js"></script>
+</head>
+<body>
+	<svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
+	<script type="text/javascript">
+		var g = new Graph("canvas", 960, 700 );
+
+		g.create_node("Animalia");
+		g.create_node("Chordata");
+		g.create_connector("Chordata","Animalia");
+		g.create_node("Mammalia");
+		g.create_connector("Mammalia","Chordata");
+		g.create_node("Erinaceomorpha");
+		g.create_connector("Erinaceomorpha","Mammalia");
+		g.create_node("Erinaceidae");
+		g.create_connector("Erinaceidae","Erinaceomorpha");
+		g.create_node("Erinaceinae");
+		g.create_connector("Erinaceinae","Erinaceidae");
+
+		g.create_node("Atelerix");
+		g.create_connector("Atelerix","Erinaceinae");
+		g.create_node("Erinaceus");
+		g.create_connector("Erinaceus","Erinaceinae");
+		g.create_node("Hemiechinus");
+		g.create_connector("Hemiechinus","Erinaceinae");
+		g.create_node("Mesechinus");
+		g.create_connector("Mesechinus","Erinaceinae");
+		g.create_node("Paraechinus");
+		g.create_connector("Paraechinus","Erinaceinae");
+
+		g.go();
+	</script>
+</body>
+</html>

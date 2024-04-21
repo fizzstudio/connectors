@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Fetch: Related Artists</title>
+  <style>
+
+    body { 
+      color: #ddd;
+      background: #111; 
+      font: 1em Helvetica, sans-serif; 
+      font-family: Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+      margin: 1em;
+    }
+
+    h1 { 
+      font-family: Helvetica, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+    }
+
+    button, input { 
+      font-family: Helvetica, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+      font-size: 1em;
+    }
+
+      input { 
+        font-size: 0.8em;
+      }
+
+    svg {
+      /*outline: red thin solid;*/
+      /*background-color: purple;*/
+    }
+
+    #framing {
+      box-sizing: border-box;
+      background: #EEEEEE;
+      box-shadow: 0 0 50px 0 rgba(0,0,0,0.1) inset;
+      border-radius: 10px;
+      font-family: Fell, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+      font-size: 18px;
+      color: #000;
+    }
+
+  </style>
+  <script type="text/javascript" src="grapher.js"></script>
+
+</head>
+<body>
+  <h1>XKCD Comic Strip Convertor</h1>
+
+  <label for="strip_number">Strip # </label>
+  <input id="strip_number" type="number" min="1" max="2000" step="1" value="386"/>
+  <button id="artist_button" onclick="do_artist_search()">Convert Comic Strip</button>
+
+  <p id="prime_artist"></p>
+  <ul id="related_artists"></ul>
+  <div id="framing">
+    <svg id="canvas"></svg>
+  </div>
+
+
+  <script type="text/javascript">
+
+    function do_artist_search() {
+      const canvas = document.getElementById('canvas'); // Get the list where we will place our related_artists
+      while ( canvas.firstChild ) {
+        canvas.removeChild(canvas.lastChild);
+      }
+
+      const strip_number_input = document.getElementById("strip_number");
+      var strip_number = strip_number_input.value;
+      if ( !strip_number) {
+        strip_number = 386;
+      }
+
+      // let url = "https://xkcd.com/" + strip_number + "/info.0.json";
+      let url = "http://dynamic.xkcd.com/api-0/jsonp/comic/" + strip_number;
+
+      fetch( url, { mode: 'no-cors' } )
+      .then(function(response) {
+        // Here you get the data to modify as you please
+        console.info("then 1");
+        console.info("response:", response);
+        console.info("response.json():", response.json()); // resolves with a Blob
+        // console.info("response.headers:", response.headers);
+        // console.info("response.headers.get:", response.headers.get);
+        // console.info("response:", response);
+        // console.info("response.body:", response.body);
+        // console.info("response.clone():", response.clone()); // creates a clone of the response
+        // console.info("response.redirect():", response.redirect()); // creates a new response but with a different URL
+        // console.info("response.arrayBuffer():", response.arrayBuffer()); // return a promise that resolves with an ArrayBuffer
+        // console.info("response.formData():", response.formData()); // returns a promise that resolves with FormData object
+        // console.info("response.blob():", response.blob()); // resolves with a Blob
+        // console.info("response.text():", response.text()); // resolves with a string
+        // console.info("response.json():", response.json()); // resolves the promise with JSON
+
+        return response;
+      })
+      // .then(function(response) {
+      //   // Here you get the data to modify as you please
+      //   console.info("then 2", response.body);
+      //   return response;
+      // })
+      // .then( (response) => response.json() ) // Transform the data into json
+      .then(function(response) {
+        // Here you get the data to modify as you please
+        console.info("then 2", response);
+        return response;
+      })
+      // .then(function(data) {
+      //   // Here you get the data to modify as you please
+      //   console.info("then", data);
+      // })
+      .catch(function(error) {
+        // If there is any error you will catch them here
+        console.info("catch", error);
+      });   
+
+
+
+
+
+      // fetch(url)
+      // .then((response) => response.json()) // Transform the data into json
+      // .then(function(json) {
+      //   let related_artists = json.similarartists.artist; // Get the results
+      //   console.info("then", related_artists );
+
+      //   var graph = new Graph("canvas", 600, 600 );
+      //   graph.repulsion = graph.repulsion * repulsion_multiple; // stronger repulsion
+      //   graph.spring_length = spring_length; // longer springs
+
+      //   var box_style = "fill:#111; stroke:#111; stroke-width:2px; stroke-opacity:0.5;";
+      //   var text_style = "fill: #eee;";
+
+      //   var rootname = json.similarartists['@attr']['artist'];
+      //   graph.create_node(rootname, box_style, text_style, 100, 100);
+
+      //   // var style = "";
+      //   // for (var r = 0, r_len = related_artists.length; r_len > r; ++r) {
+      //   //   var each_artist = related_artists[r];
+      //   //   graph.create_node( each_artist.name );
+      //   //   // custom edge style, width based on similarity
+      //   //   style = "stroke: #666; stroke-width: " + each_artist.match * 5 +";";
+      //   //   graph.create_connector( each_artist.name, rootname, style );
+      //   // }
+
+
+      //   prime_artist.textContent = json.similarartists["@attr"].artist; 
+
+      //   var map = related_artists.map( function(each_artist) { // Map through the results and for each run the code below
+      //     let style = "";
+          
+      //     let li = createNode('li'); //  Create the elements we need
+      //     li.textContent = each_artist.name; // Make the HTML of our span to be the first and last name of our author
+      //     append(ul, li);
+
+      //     var box_style = "fill:#eee; stroke:#eee; stroke-width:5px; stroke-opacity:0.5;";
+      //     var text_style = "fill: #111;";
+
+      //     var node = graph.create_node( each_artist.name, box_style, text_style );
+
+      //     // custom edge style, width based on similarity
+      //     console.info("match", each_artist.match, (Math.log(+each_artist.match * 100) / 2) );
+      //     style = "stroke: #666; stroke-width: " + (+each_artist.match * 5) +";";
+      //     graph.create_connector( each_artist.name, rootname, style );
+
+      //     return node;
+      //   }) 
+
+      //   console.info("map", map);
+
+      //   graph.go();
+
+      //   return map;
+      // })
+      // .catch(function(error) {
+      //   // If there is any error you will catch them here
+      //   console.info("catch", error);
+      // });   
+    }
+
+    function make_embeddable_image( url ) {
+      const data_url = url => fetch( url )
+        .then( response => response.blob() )
+        .then(
+          blob => new Promise( (resolve, reject) => {
+            const reader = new FileReader()
+            reader.onloadend = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(blob);
+          })
+        )
+
+      return data_url;
+
+      // const toDataURL = url => fetch( url )
+      //   .then( response => response.blob() )
+      //   .then(
+      //     blob => new Promise( (resolve, reject) => {
+      //       const reader = new FileReader()
+      //       reader.onloadend = () => resolve(reader.result);
+      //       reader.onerror = reject;
+      //       reader.readAsDataURL(blob);
+      //     })
+      //   )
+
+
+      // toDataURL('https://www.gravatar.com/avatar/d50c83cc0c6523b4d3f6085295c953e0')
+      // .then(dataUrl => {
+      //   console.log('RESULT:', dataUrl)
+      // })     
+      //   return document.createElement(element); // Create the type of element you pass in the parameters
+      }
+
+    function append(parent, el) {
+      return parent.appendChild(el); // Append the second parameter(element) to the first one
+    }      
+  </script>
+
+</body>
+</html>

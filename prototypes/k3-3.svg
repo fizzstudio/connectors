@@ -1,0 +1,44 @@
+<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+  <title>Connector Demo</title>
+  <desc>Alternate description</desc>
+  <metadata>author: schepers, created: 12-10-2009</metadata>
+
+  <script id="connectorLibrary" xlink:href="connector.js" type="text/ecmascript"/>
+
+  <defs>
+    <circle id="type1" cx="0" cy="0" r="20" stroke-width="3"/>
+
+    <marker id="arrow" viewBox="-13 -6 15 12"
+            refX="20" refY="0" markerWidth="8" markerHeight="16" orient="auto">
+      <path d="M-10,-5 L0,0 -10,5 Z" stroke="red" fill="red" stroke-linejoin="round" stroke-linecap="round"/>
+    </marker>
+  </defs>
+  
+  <rect id="BackDrop" x="0" y="0" width="100%" height="100%" fill="none" pointer-events="all" stroke="black"/>
+
+  <g stroke="red" stroke-width="2" marker-end="url(#arrow)">
+    <connector n1="#orange" n2="#blue" directed="true"/>
+    <connector n1="#purple" n2="#blue" directed="true"/>
+    <connector n1="#black" n2="#blue" directed="true"/>
+
+    <connector n1="#orange" n2="#red" directed="true"/>
+    <connector n1="#purple" n2="#red" directed="true"/>
+    <connector n1="#black" n2="#red" directed="true"/>
+
+    <connector n1="#orange" n2="#green" directed="true"/>
+    <connector n1="#purple" n2="#green" directed="true"/>
+    <connector n1="#black" n2="#green" directed="true"/>
+  </g>
+
+  <g id="nodes">
+    <use id="blue" x="40" y="35" xlink:href="#type1" fill="cornflowerblue" stroke="blue"/>
+    <use id="red" x="140" y="35" xlink:href="#type1" fill="pink" stroke="red" />
+    <use id="green" x="240" y="35" xlink:href="#type1" fill="lime" stroke="green" />
+
+    <use id="purple" x="40" y="175" xlink:href="#type1" fill="violet" stroke="purple" />
+    <use id="orange" x="140" y="175" xlink:href="#type1" fill="yellow" stroke="orange" />
+    <use id="black" x="240" y="175" xlink:href="#type1" fill="gray" stroke="black" />
+  </g>
+
+</svg>

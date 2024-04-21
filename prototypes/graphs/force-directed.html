@@ -1,0 +1,137 @@
+<html>
+<head>
+<title>using the force is hard</title>
+
+<script type="text/javascript" src="d3.v2.min.js"></script>    
+<style type="text/css">
+body {
+  font-family:helvetica;
+  color:black;
+  background-color:#303030;
+  line-height:1.6em;
+}
+
+a {
+  color:orange;
+}
+
+a:hover {
+  text-decoration:none;
+}  
+</style>
+</head>
+<body>
+
+    
+
+
+
+
+<script type="text/javascript">
+  
+var setCoords = new Array();
+  var coords = new Array();
+    coords.x = -1;
+    coords.y = -1;
+setCoords[0] = coords;
+  var coords = new Array();
+    coords.x = 1;
+    coords.y = -1;
+setCoords[1] = coords;
+  var coords = new Array();
+    coords.x = -1;
+    coords.y = 1;
+setCoords[2] = coords;
+  var coords = new Array();
+    coords.x = 1;
+    coords.y = 1;
+setCoords[3] = coords;
+
+var width = window.innerWidth, height = window.innerHeight;
+
+var colorArr = new Array();
+       colorArr.push('green');
+         colorArr.push('red');
+        colorArr.push('blue');
+      colorArr.push('yellow');
+
+var paper = Raphael( 0, 0, window.innerWidth, window.innerHeight );
+paper['canvas'].id = "interface";
+
+var circleHolder = paper.set();
+
+for( i=0; i < 4; i++ ) {
+   circleHolder.push(  paper.circle(
+                           Math.round( ( window.innerWidth / 2 ) + ( setCoords[i]['x'] * 15 ) ),
+                           Math.round( ( window.innerHeight / 2 ) + ( setCoords[i]['y'] * 15 ) ),
+                           20
+                         ).attr("fill",colorArr[i])
+                          .attr("stroke","orange")
+                          .attr("stroke-width",4)
+                    );
+}
+
+Raphael.st.nodes = function() {
+  var elements = [];
+  this.forEach( function(i) {
+    elements.push( i.node );
+  });
+  return elements;
+}
+
+var nodes = circleHolder.nodes();
+var force = d3.layout.force()
+                       .charge(-120)
+                       .gravity( .05 )
+                       .nodes( nodes )
+                       .size([width,height]);
+
+force.start()
+force.on("tick", function(e){
+  var q = d3.geom.quadtree( nodes ),
+      i = 0,
+      n = nodes.length;
+
+  while( ++i < n ) {
+    q.visit(collide( nodes[i]));
+  }
+
+  d3.selectAll('circle')
+       .data(nodes)
+       .attr("cx", function(d) { console.log(d); return d.x; })
+       .attr("cy", function(d) { return d.y; });
+
+});
+
+function collide( node ) {
+    
+  var r = node.radius + 16,
+      nx1 = node.x - r,
+      nx2 = node.x + r,
+      ny1 = node.y - r,
+      ny2 = node.y + r;
+  return function( quad, x1, y1, x2, y2 ) {
+    if ( quad.point && ( quad.point !== node ) ) {
+      var x = node.x - quad.point.x,
+          y = node.y - quad.point.y,
+          l = Math.sqrt( x * x + y * y ),
+          r = node.radius + quad.point.radius;
+      if( l < r ) {
+        l = (l-r) / 1 * .5;
+        node.x -= x *= 1;
+        node.y -= y *= 1;
+        quad.point.x += x;
+        quad.point.y += y;
+      }
+    }
+    return x1 > nx2
+        || x2 < nx1
+        || y1 > ny2
+        || y2 < ny1;
+   }
+}  
+</script>
+    
+    
+</body>
+</html>    

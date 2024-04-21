@@ -1,0 +1,227 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="100%" height="100%" > <!--viewBox="0 0 1000 600" -->
+
+  <title>Connector Demo</title>
+  <desc>Alternate description</desc>
+  <metadata>author: schepers, created: 12-10-2009</metadata>
+
+  <script id="connectorLibrary" xlink:href="connector.js" type="text/ecmascript"/>
+
+  <defs>
+    <linearGradient id="fade" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#90a4be" />
+      <stop offset="1" stop-color="#b0c4de" />
+    </linearGradient>
+    
+
+    <rect id="entity" x="-53" y="-32" width="106" height="64">
+      <title>Entity Symbol</title>
+      <desc>The entity symbol represents a person or role within a organization's hierarchy.</desc>
+      <point role="port input" x="0" y="-32" />
+      <point role="port output" x="0" y="32" />
+    </rect>
+
+  </defs>
+  
+  <rect id="BackDrop" x="0" y="0" width="100%" height="100%" fill="none" pointer-events="all" stroke="black"/>
+
+  <g id="nodes">
+    <use id="e1" x="500" y="100" xlink:href="#entity" fill="url(#fade)" stroke="#483d8b" focusable="true">
+      <title>Manager</title>
+      <point role="port input" x="0" y="-32" />
+      <point role="port output" x="0" y="32" />
+    </use>  
+
+    <use id="e2" x="400" y="200" xlink:href="#entity" fill="url(#fade)" stroke="#483d8b" focusable="true">
+      <title>Manager</title>
+      <point role="port input" x="0" y="-32" />
+      <point role="port output" x="0" y="32" />
+    </use>  
+
+    <use id="e3" x="600" y="200" xlink:href="#entity" fill="url(#fade)" stroke="#483d8b" focusable="true">
+      <title>Manager</title>
+      <point role="port input" x="0" y="-32" />
+      <point role="port output" x="0" y="32" />
+    </use>  
+
+    <use id="e4" x="300" y="300" xlink:href="#entity" fill="url(#fade)" stroke="#483d8b" focusable="true">
+      <title>Manager</title>
+      <point role="port input" x="0" y="-32" />
+      <point role="port output" x="0" y="32" />
+    </use>  
+
+    <use id="e5" x="500" y="300" xlink:href="#entity" fill="url(#fade)" stroke="#483d8b" focusable="true">
+      <title>Manager</title>
+      <point role="port input" x="0" y="-32" />
+      <point role="port output" x="0" y="32" />
+    </use>  
+
+    <use id="e6" x="700" y="300" xlink:href="#entity" fill="url(#fade)" stroke="#483d8b" focusable="true">
+      <title>Manager</title>
+      <point role="port input" x="0" y="-32" />
+      <point role="port output" x="0" y="32" />
+    </use>  
+
+    <use id="e7" x="200" y="400" xlink:href="#entity" fill="url(#fade)" stroke="#483d8b" focusable="true">
+      <title>Manager</title>
+      <point role="port input" x="0" y="-32" />
+      <point role="port output" x="0" y="32" />
+    </use>  
+
+    <use id="e8" x="400" y="400" xlink:href="#entity" fill="url(#fade)" stroke="#483d8b" focusable="true">
+      <title>Manager</title>
+      <point role="port input" x="0" y="-32" />
+      <point role="port output" x="0" y="32" />
+    </use>  
+
+    <use id="e9" x="600" y="400" xlink:href="#entity" fill="url(#fade)" stroke="#483d8b" focusable="true">
+      <title>Manager</title>
+      <point role="port input" x="0" y="-32" />
+      <point role="port output" x="0" y="32" />
+    </use>  
+
+    <use id="e10" x="800" y="400" xlink:href="#entity" fill="url(#fade)" stroke="#483d8b" focusable="true">
+      <title>Manager</title>
+      <point role="port input" x="0" y="-32" />
+      <point role="port output" x="0" y="32" />
+    </use>  
+
+    <use id="e11" x="100" y="500" xlink:href="#entity" fill="url(#fade)" stroke="#483d8b" focusable="true">
+      <title>Manager</title>
+      <point role="port input" x="0" y="-32" />
+      <point role="port output" x="0" y="32" />
+    </use>  
+
+    <use id="e12" x="300" y="500" xlink:href="#entity" fill="url(#fade)" stroke="#483d8b" focusable="true">
+      <title>Manager</title>
+      <point role="port input" x="0" y="-32" />
+      <point role="port output" x="0" y="32" />
+    </use>  
+
+    <use id="e13" x="500" y="500" xlink:href="#entity" fill="url(#fade)" stroke="#483d8b" focusable="true">
+      <title>Manager</title>
+      <point role="port input" x="0" y="-32" />
+      <point role="port output" x="0" y="32" />
+    </use>  
+
+    <use id="e14" x="700" y="500" xlink:href="#entity" fill="url(#fade)" stroke="#483d8b" focusable="true">
+      <title>Manager</title>
+      <point role="port input" x="0" y="-32" />
+      <point role="port output" x="0" y="32" />
+    </use>  
+
+    <use id="e15" x="900" y="500" xlink:href="#entity" fill="url(#fade)" stroke="#483d8b" focusable="true">
+      <title>Manager</title>
+      <point role="port input" x="0" y="-32" />
+      <point role="port output" x="0" y="32" />
+    </use>  
+
+  </g>
+
+  <g stroke="blue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <!-- <point x="500" y="150" />
+      <point x="300" y="200" />
+      <point x="300" y="300" /> -->
+      
+    <connector id="e1-e2" n1="#e1" n2="#e2" n1port="output" n2port="input" directed="true" marker-end="url(#arrow)">
+      <title></title>
+      <desc></desc>
+      <point x="500" y="150" />
+      <point x="400" y="150" />
+    </connector>  
+    
+    <connector id="e1-e3" n1="#e1" n2="#e3" n1port="output" n2port="input" directed="true" marker-end="url(#arrow)">
+      <title></title>
+      <desc></desc>
+      <point x="500" y="150" />
+      <point x="600" y="150" />
+    </connector>  
+    
+    <connector id="e2-e4" n1="#e2" n2="#e4" n1port="output" n2port="input" directed="true" marker-end="url(#arrow)">
+      <title></title>
+      <desc></desc>
+      <point x="400" y="250" />
+      <point x="300" y="250" />
+    </connector>  
+    
+    <connector id="e3-e5" n1="#e3" n2="#e5" n1port="output" n2port="input" directed="true" marker-end="url(#arrow)">
+      <title></title>
+      <desc></desc>
+      <point x="600" y="250" />
+      <point x="500" y="250" />
+    </connector>  
+    
+    <connector id="e3-e6" n1="#e3" n2="#e6" n1port="output" n2port="input" directed="true" marker-end="url(#arrow)">
+      <title></title>
+      <desc></desc>
+      <point x="600" y="250" />
+      <point x="700" y="250" />
+    </connector>  
+    
+    <connector id="e5-e7" n1="#e5" n2="#e7" n1port="output" n2port="input" directed="true" marker-end="url(#arrow)">
+      <title></title>
+      <desc></desc>
+      <point x="500" y="350" />
+      <point x="200" y="350" />
+    </connector>  
+    
+    <connector id="e5-e8" n1="#e5" n2="#e8" n1port="output" n2port="input" directed="true" marker-end="url(#arrow)">
+      <title></title>
+      <desc></desc>
+      <point x="500" y="350" />
+      <point x="400" y="350" />
+    </connector>  
+    
+    <connector id="e5-e9" n1="#e5" n2="#e9" n1port="output" n2port="input" directed="true" marker-end="url(#arrow)">
+      <title></title>
+      <desc></desc>
+      <point x="500" y="350" />
+      <point x="600" y="350" />
+    </connector>  
+    
+    <connector id="e5-e10" n1="#e5" n2="#e10" n1port="output" n2port="input" directed="true" marker-end="url(#arrow)">
+      <title></title>
+      <desc></desc>
+      <point x="500" y="350" />
+      <point x="800" y="350" />
+    </connector>  
+    
+    <connector id="e8-e11" n1="#e8" n2="#e11" n1port="output" n2port="input" directed="true" marker-end="url(#arrow)">
+      <title></title>
+      <desc></desc>
+      <point x="400" y="450" />
+      <point x="100" y="450" />
+    </connector>  
+    
+    <connector id="e8-e12" n1="#e8" n2="#e12" n1port="output" n2port="input" directed="true" marker-end="url(#arrow)">
+      <title></title>
+      <desc></desc>
+      <point x="400" y="450" />
+      <point x="300" y="450" />
+    </connector>  
+    
+    <connector id="e8-e13" n1="#e8" n2="#e13" n1port="output" n2port="input" directed="true" marker-end="url(#arrow)">
+      <title></title>
+      <desc></desc>
+      <point x="400" y="450" />
+      <point x="500" y="450" />
+    </connector>  
+    
+    <connector id="e10-e14" n1="#e10" n2="#e14" n1port="output" n2port="input" directed="true" marker-end="url(#arrow)">
+      <title></title>
+      <desc></desc>
+      <point x="800" y="450" />
+      <point x="700" y="450" />
+    </connector>  
+    
+    <connector id="e10-e15" n1="#e10" n2="#e15" n1port="output" n2port="input" directed="true" marker-end="url(#arrow)">
+      <title></title>
+      <desc></desc>
+      <point x="800" y="450" />
+      <point x="900" y="450" />
+    </connector>  
+
+
+  </g>
+
+</svg>

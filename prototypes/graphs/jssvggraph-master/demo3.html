@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+		<title>Simple Graph Layout: Last.fm Similar Bands</title>
+		<style>
+		body { background: black; font: 13px/13px helvetica, sans-serif; }
+		#canvas { display: block; margin: auto; width: 960px; height: 720px; border: #111 1px solid; }
+		</style>
+		<!-- <script src="http://code.jquery.com/jquery-latest.js"></script> -->
+
+		<script type="text/javascript">
+			function getJSON_xhr( url ) {
+			    var request = new requestRequest();
+
+			    request.onreadystatechange = function() {
+			        if (request.readyState == requestRequest.DONE ) {
+			           if (request.status == 200) {
+			              console.info( request.responseText );
+			           }
+			           else if (request.status == 400) {
+			              alert('There was an error 400');
+			           }
+			           else {
+			               alert('something else other than 200 was returned');
+			           }
+			        }
+			    };
+
+			    request.open("GET", url, true);
+			    request.send();
+			}
+		</script>
+<!-- 
+		With jQuery:
+
+		$.ajax({
+		    url: "test.html",
+		    context: document.body,
+		    success: function(){
+		      $(this).addClass("done");
+		    }
+		});			
+
+		 -->
+
+		 <script type="text/javascript">
+			function getJSON( url ) {
+				var opts = {
+				  method: 'GET',
+				  body: 'json',
+				  headers: {}
+				};
+
+				fetch(url, opts).then( function (response) {
+				  return response.json();
+				})
+					.then(function (body) {
+			      console.info( body );
+					});		
+			} 	
+		 </script>
+
+		<script type="text/javascript" src="graph.js"></script>
+	</head>
+	<body>
+		<svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
+		<script type="text/javascript">
+			var g = new Graph("canvas", 960, 720 );
+			g.repulsion = g.repulsion * 2; // stronger repulsion
+			g.spring_length = 50; // longer springs
+
+			// fetch the ten most similar artists to this one
+			var bandname = "Uncle Tupelo";
+			var limit = 10; // 8
+			$.getJSON("http://ws.audioscrobbler.com/2.0/?method=artist.getSimilar&artist=" + bandname + "&api_key=deb44a948a0acdc5b0ff858eaf531f57&limit=" + limit + "&format=json&callback=?", function(data) {
+				rootname = data.similarartists['@attr']['artist'];
+				g.createVertex(rootname, "#006600");
+				$.each(data.similarartists.artist, function(i,item){
+					g.createVertex(item.name);
+					// custom edge style, width based on similarity
+					style = "stroke: #666; stroke-width: " + item.match * 5 +";";
+					g.createEdge(item.name,rootname,style);
+				});
+			});
+			g.go();
+		</script>
+	</body>
+</html>

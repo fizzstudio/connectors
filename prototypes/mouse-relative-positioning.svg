@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200">
+  <script type="text/javascript">
+
+// This is a demonstration of getCoordsAt() - a proposed addition to the DOM
+// interface 'MouseEvent' - that would save authors from having to work with
+// matrices when positioning elements based on the location of a pointer event.
+//
+// This file demonstrates getCoordsAt for SVG only, but it would be just as
+// useful in HTML, especially with the advent of CSS-transforms.
+
+
+document.addEventListener('mousemove', function(event)
+{
+  var circle = document.getElementById('circle');
+
+  reparent(circle); // just to show things still work even if the element is moved around the doc
+
+  var coords = event.getCoordsAt(circle);
+
+  circle.setAttribute('cx', coords.x);
+  circle.setAttribute('cy', coords.y);
+}
+, false);
+
+
+// JavaScript implementation of getCoordsAt for SVG:
+
+if (!MouseEvent.prototype.getCoordsAt) {
+  MouseEvent.prototype.getCoordsAt = function(element) {
+    //Opera doesn't like this:
+    //if (!(element instanceof SVGElement))
+    //  throw 'MouseEvent.getCoordsAt not implemented for non-SVG elements';
+
+    var SVGNS = 'http://www.w3.org/2000/svg';
+    var svg = document.createElementNS(SVGNS, 'svg');
+    var pt = svg.createSVGPoint();
+    pt.x = this.clientX;
+    pt.y = this.clientY;
+    return pt.matrixTransform(element.getScreenCTM().inverse());
+  }
+}
+
+
+function reparent(element)
+{
+  var a = document.getElementById('a');
+  var b = document.getElementById('b');
+  var c = document.getElementById('c');
+
+  if (element.parentNode == a)
+    b.appendChild(element);
+  else if (element.parentNode == b)
+    c.appendChild(element);
+  else
+    a.appendChild(element);
+}
+
+  </script>
+
+  <svg id="a" transform="translate(50, 100)" style="overflow:visible;">
+    <g id="b" transform="rotate(45)">
+      <g id="c" transform="translate(150, -80)">
+        <circle id="circle" transform="scale(20)" r="1" fill="lime"/>
+      </g>
+    </g>
+  </svg>
+
+</svg>

@@ -1,0 +1,50 @@
+<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+  <title>Connector Demo</title>
+  <desc>Alternate description</desc>
+  <metadata>author: schepers, created: 12-10-2009</metadata>
+
+  <script id="connectorLibrary" xlink:href="connector.js" type="text/ecmascript"/>
+
+  <defs>
+    <circle id="type1" cx="0" cy="0" r="20" stroke-width="3"/>
+
+    <marker id="arrow" viewBox="-13 -6 15 12"
+            refX="20" refY="0" markerWidth="8" markerHeight="16" orient="auto">
+      <path d="M-10,-5 L0,0 -10,5 Z" stroke="black" fill="black" stroke-linejoin="round" stroke-linecap="round"/>
+    </marker>
+  </defs>
+  
+  <rect id="BackDrop" x="0" y="0" width="100%" height="100%" fill="none" pointer-events="all" stroke="black"/>
+
+  <g>
+    <connector n1="#blue" n2="#green" directed="true"/>
+    <connector n1="#blue" n2="#orange" directed="true"/>
+    <connector n1="#blue" n2="#purple" directed="true"/>
+    <connector n1="#blue" n2="#black" directed="true"/>
+    <connector n1="#blue" n2="#brown" directed="true"/>
+
+    <connector n1="#red" n2="#green" directed="true"/>
+    <connector n1="#red" n2="#orange" directed="true"/>
+    <connector n1="#red" n2="#purple" directed="true"/>
+    <connector n1="#red" n2="#black" directed="true"/>
+    <connector n1="#red" n2="#brown" directed="true"/>
+
+  </g>
+
+  <!-- <circle id="blue-shadow" cx="267" cy="53" r="20" stroke-width="3" fill="cornflowerblue" stroke="blue" stroke-dasharray="5,5" stroke-linecap="round"/> -->
+
+  <g id="nodes">
+    <use id="blue" x="267" y="53" xlink:href="#type1" fill="cornflowerblue" stroke="blue"/>
+    <use id="red" x="208" y="117" xlink:href="#type1" fill="pink" stroke="red" />
+
+    <use id="green" x="134" y="143" xlink:href="#type1" fill="lime" stroke="green" />
+    <use id="orange" x="111" y="78" xlink:href="#type1" fill="yellow" stroke="orange" />
+    <use id="purple" x="185" y="54" xlink:href="#type1" fill="violet" stroke="purple" />
+    <use id="black" x="44" y="44" xlink:href="#type1" fill="gray" stroke="black" />
+    <use id="brown" x="44" y="44" xlink:href="#type1" fill="tan" stroke="brown" />
+    
+    <!-- <circle id="brown" cx="250" cy="250" r="20" stroke-width="3" fill="tan" stroke="brown"/> -->
+  </g>
+
+</svg>
