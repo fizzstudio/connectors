@@ -1,0 +1,1604 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>SVG Connector 1.0, Part 2: Language</title>
+    <link rel="stylesheet" type="text/css" href="resources/svg-style.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.w3.org/StyleSheets/TR/w3c-tr.css" />
+    <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/W3C-ED" type="text/css" />
+    <style type="text/css" media="screen">
+      .issue {
+        background-color: #ff6347;
+        color: white;
+      }
+      
+      .issue a {
+        color: #ffd700;
+      }
+      
+      .note {
+        background-color: white;
+        color:green;
+      }
+      
+      .warning {
+        color: #8b0000;
+      }
+      
+      .proposal {
+         border:1px solid green;
+         background-color: yellow;
+         color: green;
+      }
+      
+      .example {
+        border:1px solid #ffa500;
+        background-color: #fffacd;
+        padding: 1em;
+      }
+
+      .atrisk {
+        border:1px solid red;
+        background-color: #fff0f5;
+        color: gray;
+      }
+
+      
+      a.def {
+        color: inherit;
+        text-decoration: inherit;
+        border-bottom: 1.8px dashed blue;
+      }
+      
+
+      /* style for heading links */
+      a[id]:hover:after { 
+        content: "   #" attr(id) " § "; 
+        font-size: 80%;
+        color: #ccc;
+        text-decoration: none;
+      }
+      
+      h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+        color: inherit !important;
+        font-weight: inherit !important;
+        text-decoration: none !important;
+        font-style: inherit !important;
+      }
+
+      .reference {
+        color: gray;
+        background-color: gainsboro;
+        border: 1px dashed gray;
+        padding: 2em;
+      }
+      
+
+    </style>
+  </head>
+  <body>
+    <div class="head">
+      <p>
+        <a href="http://www.w3.org/">
+          <img width="72" alt="W3C" src="http://www.w3.org/Icons/w3c_home" height="48" />
+        </a>
+      </p>
+      <h1>SVG Connector 1.0, Part 2: Language</h1>
+      <h2 id="pagesubtitle">W3C Editor's Draft <em>8 January 2011</em></h2>
+      <dl>
+        <dt>This version:</dt>
+        <dd>
+          <a href="https://dev.w3.org/SVG/modules/connector/SVGConnector.html">http://dev.w3.org/SVG/modules/connector/SVGConnector.html</a>
+        </dd>
+        <dt>Latest version:</dt>
+        <dd>
+          <a href="https://dev.w3.org/SVG/modules/connector/SVGConnector.html">http://dev.w3.org/SVG/modules/connector/SVGConnector.html</a>
+        </dd>
+        <dt>Previous version:</dt>
+          <a href="https://dev.w3.org/SVG/modules/connector/SVGConnector.html">http://dev.w3.org/SVG/modules/connector/SVGConnector.html</a>
+        <dt>Editor:</dt>
+        <dd>Doug Schepers, W3C &lt;<a href="mailto:schepers@w3.org">schepers@w3.org</a>&gt;</dd>
+        <!-- <dt>Authors:</dt>
+        <dd>The authors of this specification are the participants of the W3C SVG Working Group.</dd> -->
+      </dl>
+      <p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2004 <a href="http://www.w3.org/"><acronym title="World Wide Web Consortium">W3C</acronym></a><sup>®</sup> (<a href="http://www.lcs.mit.edu/"><acronym title="Massachusetts Institute of Technology">MIT</acronym></a>, <a href="http://www.ercim.org/"><acronym title="European Research Consortium for Informatics and Mathematics">ERCIM</acronym></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a>, <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-software">software licensing</a> rules apply. </p>
+    </div>
+    <hr title="Separator from Header" />
+    <h2><a id="abstract" href="#abstract">Abstract</a></h2>
+    <p>This specification defines a simple mechanism to visually and logically connect two elements, as for an abstract graph.  It introduces new elements, <a>connector</a> and <a>point</a>, and describes both the appearance and behavior of these elements, specifically in terms of rendering and navigation.
+    
+    <p>Although originally designed for use in SVG, some aspects of this specification are defined in XML and are accessed via presentation properties, and therefore could be used in other environments, such as HTML styled with CSS and XSL:FO.  This module is intended for implementation by SVG 1.1 or SVG Tiny 1.2 user agents as a compatible extension of those specifications, and will be incorporated into the SVG 2.0 specification.</p>
+    
+    <p>This document defines the markup used by SVG Connector.  There is an accompanying <a href="#SVG12ConnectorPrimer">primer document</a> that lists the ways SVG Connector may be used.</p>
+    
+    <h2><a id="status" href="#status"> Status of This Document</a></h2>
+    <p><em>This section describes the status of this document at the time of its publication. Other documents may supersede this document. The latest status of this document series is maintained at the W3C.</em></p>
+    <p class="warning" id="warning-block-1"><strong>Warning!</strong> This specification is still a proposal in early Editor's Draft state, and is not yet ready for public comments.  Subsequent drafts will include contact information for review comments.</p>
+    <p>There is an accompanying <a href="#SVG12ConnectorPrimer">SVG Connector 1.0, Part 1: Primer</a> that lists the ways SVG Connector may be used. </p>
+    <p>This document has been produced by the <a href="http://www.w3.org/Graphics/SVG">W3C SVG Working Group</a> as part of the W3C <a href="http://www.w3.org/Graphics/Activity">Graphics Activity</a> within the <a href="http://www.w3.org/Interaction/">Interaction Domain</a>.
+</p>
+    <!-- <p>We explicitly invite comments on this specification. Please send them to <a href="mailto:www-svg@w3.org">www-svg@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/www-svg/">archives</a>), the public email list for issues related to vector graphics on the Web. Acceptance of the archiving policy is requested automatically upon first post to either list. To subscribe to this list, please send an email to <a href="mailto:www-svg-request@w3.org">www-svg-request@w3.org</a> with the word subscribe in the subject line. </p> -->
+    <p>The latest information regarding <a href="http://www.w3.org/Graphics/SVG/Disclosures">patent disclosures</a> related to this document is available on the Web. As of this publication, the SVG Working Group are not aware of any royalty-bearing patents they believe to be essential to SVG. </p>
+    <p>Publication of this document does not imply endorsement by the W3C membership. A list of current W3C Recommendations and other technical documents can be found at <a href="http://www.w3.org/TR/">http://www.w3.org/TR/</a>.  W3C publications may be updated, replaced, or obsoleted by other documents at any time. It is inappropriate to cite a W3C Working Draft as anything other than a <em>work in progress</em>.</p>
+    <hr />
+    <h2><a id="howto" href="#howto"> How to read this document and give feedback</a></h2>
+    <p>This draft of SVG Connector introduces new Connector syntax and markup for the SVG language. One of the goals is that this specification can be re-used more easily by other specifications that want to have advanced Connector features.  This specification introduces syntax that may not be backwards compatible with older SVG User Agents, and the use of this syntax should be accompanied by a fallback using the 'switch' element.</p>
+    <p>The main purpose of this document is to encourage public feedback. The best way to give feedback is by sending an email to <a href="mailto:www-svg@w3.org">www-svg@w3.org</a>. Please include some kind of keyword that identifies the area of the specification the comment is referring to in the subject line of your message (e.g "Section X.Y - Foo attribute values" or "Connector Functionality"). If you have comments on multiple areas of this document, then it is probably best to split those comments into multiple messages. </p>
+    <p>The public are welcome to comment on any aspect in this document, but there are a few areas in which the SVG Working Group are explicitly requesting feedback. These areas are noted in place within this document. There is also a specific area related to the specification that is listed here: </p>
+    <div id="toc">
+      <h2>Contents</h2>
+      <ol class="toc">
+        <li><a href="#intro">1 Introduction</a>
+          <ol class="toc">
+            <li><a href="#scope">1.1 Scope of this Specification</a></li>
+            <li><a href="#graphs">1.2 Relationships to Formal Graphs and Graph Languages</a></li>
+            <li><a href="#use-cases">1.3 Use Cases</a></li>
+            <li><a href="#style-conventions">1.4 Stylistic Conventions</a></li>
+            <li><a href="#style-conventions">1.5 Conformance</a></li>
+          </ol>
+        </li>
+
+        <li><a href="#role-attr-vals">2 Role Attribute Values</a></li>
+
+        <li><a href="#connector-elements">3 Connector Elements</a>
+          <ol class="toc">
+            <li><a href="#ConnectorElement">3.1 The <span class="code-fragment">'connector'</span> element</a></li>
+            <li><a href="#auto-rendering">3.1.1. Automatic Connector Rendering</a></li>
+            <li><a href="#ConnectorDataAnimation">3.1.2 Animating connector data</a></li>
+          </ol>
+        </li>
+
+        <li><a href="#ConnectorData">4 Connector data</a>
+          <ol class="toc">
+            <li><a href="#ConnectorDataGeneralInformation">4.1 General information about connector data</a></li>
+          </ol>
+        </li>
+
+        <li><a href="#PointElement">5 The <span class="element-name">'point'</span> element</a></li>
+
+        <li><a href="#focus-nav">6 Focus and navigation</a></li>
+
+        <li><a href="#RelaxNG">7 RelaxNG Schema for SVG Connector 1.0</a></li>
+
+        <li><a href="#DOMInterfaces">8 DOM interfaces</a></li>
+
+        <li><a href="#refs">9 References</a>
+          <ol class="toc">
+            <li><a href="#normrefs">9.1 Normative References</a></li>
+            <li><a href="#informrefs">9.2 Informative References</a></li>
+          </ol>
+        </li>
+
+        <li><a href="#Acknowledgments">10 Acknowledgments</a></li>
+      </ol>
+    </div>
+    <div id="sec-intro">
+      <h2><a id="intro" href="#intro">Introduction</a></h2>
+
+      <p>This specification defines a simple mechanism to visually and logically connect two elements, for such use cases as flow charts, circuit diagrams, org charts, or any kind of node-edge graph.  It includes the ability to automatically draw and update the connector line as a straight line along the shortest path between the elements, or to allow the shape of the connector to be defined using the syntax of the <a>path</a> element.  It also introduces the <a>point</a> element, which may be used as a connection point within shape definitions or a routing point for the <a>connector</a> element.</p>
+
+      <p>This specification also describes the manner in which the <a>connector</a> element establishes an implicit navigation relationship between connected elements.</p>
+
+      <p>Finally, this specification defines several new values for the <code>role</code> attribute and provides guidance for other use of metadata, to facilitate transformation to and from graph description languages.</p>
+
+      <p>Note that even though this specification references parts of <a href="#ref-svg11">SVG 1.1</a> and <a href="#ref-svgt12">SVG Tiny 1.2</a> it does not require a complete implementation of those specifications.</p>
+      
+      <p>This document is normative, except where otherwise indicated.</p>
+      
+      <p>This document contains explicit conformance criteria that overlap with some RNG definitions in requirements. If there is any conflict between the two, the explicit conformance criteria are the definitive reference. </p>
+    </div>
+
+
+    <div id="sec-scope">
+      <h3><a id="scope" href="#scope">Scope of this Specification</a></h3>
+      
+      <p>This specification concentrates on the visual and behavioral treatment of graphs and graph-like features, rather than the semantic or topological characteristics of graphs.  It is not within the scope of this specification to provide any automatic graph layout algorithms, or any edge routing beyond the simple cases described in the algorithm found in <a href="#auto-rendering">Automatic Connector Rendering</a>.  Other specifications may define advanced SVG layout which can be used with this specification, and future versions of this specification may provide more powerful edge routing, contingent on feedback from authors and implementers.</p>
+      
+      <p>While the <code>title</code> and <code>desc</code> elements allow human-readable text descriptions of edges and nodes, there is no special facility in this specification for the visual labeling of nodes and edges, either in semantic terms or positionally.  Textul elements, including the <code>textPath</code> elements, may be used instead.</p>
+      
+      <p>This specification does not define a generic graph description language, though most common features of graphs can be represented using this functionality.  Instead, it defines the appearance and behavior of concepts found in many graph formats, which may also be used in a non-graph and quasi-graph manner.</p>
+      
+      <p>There are minimal semantics defined for expressing complex features of graphs, with no formal treatment of hyperedges, hierarchical graphs, or nested graphs, and no provision to express graph characteristics such as planarity, connectedness, completeness, or Euler or Hamiltonian paths or circuits.  However, the native SVG metadata features described in SVG Tiny 1.2, in combination with such metadata formats as RDFa, may be used to express more complex relationships.</p>
+      
+    </div>
+
+    <div id="sec-graphs">
+      <h3><a id="graphs" href="#graphs">Relationships to Formal Graphs and Graph Languages</a></h3>
+      <p>The connectors, points, and metadata features of SVG are designed to allow easy transformation to and from graph definition and exchange languages, including:</p>
+      <ul>
+        <li>DOT (The DOT Language) [<a class="informative" href="#ref-DOT">DOT</a>]</li>
+        <li>GML (Graph Markup Language) [<a class="informative" href="#ref-GML">GML</a>]</li>
+        <li>GraphML (Graph Markup Language) [<a class="informative" href="#ref-GraphML">GraphML</a>]</li>
+        <li>GXL (Graph Exchange Language) [<a class="informative" href="#ref-GXL">GXL</a>]</li>
+        <li>XGMML (eXtensible Graph Markup and Modeling Language) [<a class="informative" href="#ref-XGMML">XGMML</a>]</li>
+      </ul>
+    
+      <p>Below is an example of a purely semantic graph, stripped of any specific graphical representation.  Note that because the empty <code>'g'</code> elements do not render and have no positional characteristics, the <code>'connector'</code> elements will not render; if these groups were filled with shapes, however, a conforming user agent would draw would draw lines between the centroids of those shapes.  The use of SVG as a purely semantic graph description exchange format is strongly discouraged, since users expect to see visual output when viewing an SVG file; all SVG files should include graphical content, even if that content is only <code>'circle'</code> or <code>'text'</code> elements.</p>
+      
+<code><pre class="example">
+&lt;svg xmlns="http://www.w3.org/2000/svg" role="graph" directed="false"&gt;
+
+  &lt;title&gt;K3,3 Graph&lt;/title&gt;
+  &lt;desc&gt;
+    The famous non-planar basic graph: a complete bipartite graph of six vertices, 
+    three of which connect to each of the other three
+  &lt;/desc&gt;
+
+  &lt;g role="node" id="n-1" /&gt;
+  &lt;g role="node" id="n-2" /&gt;
+  &lt;g role="node" id="n-3" /&gt;
+
+  &lt;g role="node" id="n-4" /&gt;
+  &lt;g role="node" id="n-5" /&gt;
+  &lt;g role="node" id="n-6" /&gt;
+
+  &lt;connector role="edge" n1="#n-1" n2="#n-4" /&gt;
+  &lt;connector role="edge" n1="#n-1" n2="#n-5" /&gt;
+  &lt;connector role="edge" n1="#n-1" n2="#n-6" /&gt;
+
+  &lt;connector role="edge" n1="#n-2" n2="#n-4" /&gt;
+  &lt;connector role="edge" n1="#n-2" n2="#n-5" /&gt;
+  &lt;connector role="edge" n1="#n-2" n2="#n-6" /&gt;
+
+  &lt;connector role="edge" n1="#n-3" n2="#n-4" /&gt;
+  &lt;connector role="edge" n1="#n-3" n2="#n-5" /&gt;
+  &lt;connector role="edge" n1="#n-3" n2="#n-6" /&gt;
+
+&lt;/svg&gt;      
+</pre></code>  
+    </div>
+
+    <div id="sec-use-cases">
+      <h3><a id="use-cases" href="#use-cases">Use Cases</a></h3>
+      <p>Connectors may be used in many applications, not all of which are necessarily intuitive:</p>
+      <ul>
+        <li>Circuit paths in circuit diagrams, to connect components</li>
+        <li>Streets, paths, or rail lines on maps, to connect cities, crossroads, or other POIs</li>
+        <li>state charts</li>
+        <li>class diagrams</li>
+        <li>org charts</li>
+        <!-- <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li> -->
+      </ul>
+    </div>
+
+    
+    <div>
+      <h3 class="div3"><a id="style-conventions" href="#style-conventions">Stylistic Conventions</a></h3>
+      <p>The following stylistic conventions are followed in this specification:</p>
+      <div style="margin-left: 3em;">
+        <p class=""><code>'This is a keyword or value'</code></p>
+        <!-- <p><a class="eventtype"><code>This is an event type</code></a></p> -->
+        <p><a class="def">This is a link to a definition in the glossary</a></p>
+        <p class="note">This is a note.</p>
+        <p class="warning">This is a warning.  It is used on security notes.</p>
+        <p class="example">This is an example.</p>
+        <p class="atrisk">This is a feature at risk, which is likely to be removed from the specification.</p>
+        <p class="proposal">This is a proposed new feature.</p>
+        <p class="issue">@@ This is an open issue.</p>
+      </div>
+      <p>Feedback on features at risk, new features, and open issues is especially appreciated.</p>
+      
+      <p>In addition, certain terms are used in this specification with particular meanings.  The term "implementation" applies to a browser, authoring tool, or other <a class="def" href="#glossary-user-agent">user agent</a> that implements this specification, while an author is a person who writes script or code that takes advantage of the interfaces, methods, attributes, events, and other features described in this specification in order to make Web applications, and a user is the person who uses those Web applications in an implementation.</p>
+    </div>
+    
+    <div>
+      <h3 class="div3"><a id="conformance" href="#style-conventions">Conformance</a></h3>
+      <p>Within this specification, the key words 
+        "MUST", 
+        "MUST NOT",
+        "REQUIRED", 
+        "SHALL", 
+        "SHALL NOT", 
+        "SHOULD", 
+        "SHOULD NOT",
+        "RECOMMENDED", 
+        "MAY", and 
+        "OPTIONAL" are to be interpreted as
+        described in <a href="http://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a>
+        [<a href="ref-RFC2119">RFC2119</a>].
+        However, for readability, these words do not necessarily appear in uppercase in this specification.</p>
+      </div>
+
+
+      <div id="sec-role-attr-vals">
+        <h2><a id="role-attr-vals" href="#role-attr-vals">2 Role Attribute Values</a></h2>
+        <p>The <code>role</code> attribute may be used to provide additional semantics to an element, particularly for use in converting or transforming from SVG into another graph format.  This specification defines several new role values to allow explicit notation of elements for ease of metadata transformations and analysis, but the use of these role values is not necessary for connector functionality.  <span class="note"><strong>Note:</strong> This specification does not define any specific functionality for these role values in the SVG context.</span></p>
+        <dl>
+          <dt><code class="attr-value">graph</code></dt>
+          <dd>
+            <p>This role value indicates that the container element is the root of a graph.  A graph in this sense is an abstract mathematical representation of a set of objects in which some pairs of the objects (nodes) may be connected by links (edges).</p>
+            <p>An element with this role attribute value which is the child of another element with the <code class="attr-value">graph</code> role attribute value must be interpreted as a nested graph (also referred to as a sub-graph).  A document with nested graphs is referred to a hierarchical graph.</p>
+            </dd>
+          
+          <dt><code class="attr-value">node</code></dt>
+          <dd>
+            <p>This role value indicates that the element is a node (or <em>vertex</em> or <em>point</em>) of a graph.  A graph node represents an object, which is normally connected to another object by an edge; it may also be thought of as the point at which two or more edges meet or intersect.</p>
+            <p>In the case of elements joined by <code>connector</code> elements, the node role may be inferred, but elements intended to be nodes which are not referents of a <code>connector</code> element may not enjoy the same role inference, especially in scenarios where graph content is mixed with other graphical content, such as UI controls.</p>
+            <p>Note that an element with the <code class="attr-value">node</code> role value may also have the <code class="attr-value">graph</code> role value, if it is a container element which contains a nested graph.</p>
+          </dd>
+          
+          <dt><code class="attr-value">edge</code></dt>
+          <dd>
+            <p>This role value indicates that the element is an edge (or <em>line</em> or <em>arc</em>) of a graph.  An edge is a link between two objects (nodes) in a graph.  An arc is specifically a directed edge.</p>
+            <p>A <code>connector</code> element may be implicitly assumed to be a edge.  The <code class="attr-value">edge</code> role indicates a link between two nodes only; for an edge which connects more than two nodes, the <code class="attr-value">hyperedge</code> role value should be used.</p>
+          </dd>
+          
+          <dt><code class="attr-value">port</code></dt>
+          <dd>
+            <p>This role value indicates that the element is a port on a node of a graph.  A port is a logical or positional point of connection within a node.  For a flowchart, this may be the midpoint of a polygon side or the corners of a shape, and for a circuit, this may be an input or output socket or the legs on a chip.  One <code class="attr-value">node</code> may have many <code class="attr-value">port</code>s defined, with different positions and characteristics.</p>
+            <p>A <code>point</code> element as a child of a <code class="attr-value">node</code> element (that is, an element with a role attribute value of <code class="attr-value">node</code> or a referent of a <code>connector</code> element) may be implicitly assumed to be a port.</p>
+            <p>When used with other, more specific supplementary roles (not defined in this specification), a the role of a <code class="attr-value">port</code> may be used to determine which of several ports a <code>connector</code> element will join to; see the definitions for <code>connector</code> and <code>point</code> elements, and <a href="#auto-rendering">Automatic Connector Rendering</a>.</p>
+          </dd>
+          
+          <dt><code class="attr-value">hyperedge</code></dt>
+          <dd>
+            <p>This role value indicates that the element is an edge of a graph which joins multiple nodes.  An edge is a link between three or more objects (nodes) in a graph.  For an edge which connects only two nodes, the <code class="attr-value">edge</code> role value should be used.</p>
+            <p>SVG does not define any behavior for hyperedges, nor any semantic means to relate one <code>connector</code> element with this role value to another as a multi-segment hyperedge; other roles or classes, or other forms of metadata, may be used for this purpose as appropriate.</p>
+          </dd>
+          
+        </ul>
+      </div>
+
+
+      <div id="sec-connector-elements">
+        <h2><a id="connector-elements" href="#connector-elements">3 Connector Elements</a></h2>
+        <p>Connectors represent a visual or logical connection between two elements, which may be styled with a stroke to illustrate the connection between elements, or hidden and used only for its navigational or logical aspects.  In terms of graph theory, the target elements are <em>vertices</em> and connector elements are <em>edges</em>.</p>
+        
+      <p>The outline of a connector may be styled in the same manner as the <a>path</a> element, but unlike the <a>path</a> element, a connector must not be filled, even in the case where it defines a closed shape.  The stroking effects are defined in <a href="painting.html">Filling, Stroking and Paint Servers</a> in SVG Tiny 1.2.</p>
+      
+      <p>A connector is either described using the explicit syntax of the <a>path</a> element, or is generated automatically using the implicit relationship between the indicated elements as modified by any child <a>point</a> elements of the <a>connector</a> element or of the target shapes.</p>
+      
+      <!-- <h3><a id="connector-elements" href="#connector-elements">2 Connector Elements</a></h3>
+            
+            
+            <p>A connector is described using the concept of a current point. In
+            an analogy with drawing on paper, the current point can be
+            thought of as the location of the pen. The position of the pen
+            can be changed, and the outline of a shape (open or closed) can
+            be traced by dragging the pen in either straight lines or
+            curves.</p>
+            <p>Connectors represent the geometry of the outline of an object,
+            defined in terms of <em>moveto</em> (set a new current point),
+            <em>lineto</em> (draw a straight line), <em>curveto</em> (draw
+            a curve using a cubic Bézier) and <em>closeconnector</em> (close the current
+            shape by drawing a line to the last <em>moveto</em>) elements.
+            Compound connectors (i.e., a connector with multiple subconnectors) are
+            possible to allow effects such as "donut holes" in objects.</p> -->
+      <p>This section describes the syntax and behavior for SVG connectors.  Various implementation notes for SVG connectors can be found in <a href="#ConnectorElementImplementationNotes"><span class="element-name">'connector'</span> element implementation notes</a>.</p>
+      
+      <p>A connector is defined in SVG using the <a href="#ConnectorElement"><span class="code-fragment">'connector'</span></a> element.</p>
+      
+      <h3><a id="ConnectorElement" href="#ConnectorElement">3.1 The <span class="code-fragment">'connector'</span> element</a></h3>
+      
+      <div class="schema">
+        <div class="schemaheader"><strong>Schema:</strong> connector<div class="schemasource"><pre>    &lt;define name='connector'&gt;
+        &lt;element name='connector'&gt;
+          &lt;ref name='connector.AT'/&gt;
+
+          &lt;zeroOrMore&gt;&lt;ref name='shapeCommon.CM'/&gt;&lt;/zeroOrMore&gt;
+        &lt;/element&gt;
+      &lt;/define&gt;
+
+      &lt;define name='connector.AT' combine='interleave'&gt;
+      &lt;ref name='svg.N1N2.attr'/&gt;
+        &lt;ref name='svg.ShapeCommon.attr'/&gt;
+
+        &lt;ref name='svg.D.attr'/&gt;
+        &lt;optional&gt;
+          &lt;ref name='svg.Directed.attr'/&gt;
+          &lt;ref name='svg.N1portN2port.attr'/&gt;
+          &lt;attribute name='connectorLength' svg:animatable='true' svg:inheritable='false'&gt;
+            &lt;ref name='Number.datatype'/&gt;
+          &lt;/attribute&gt;
+        &lt;/optional&gt;
+
+      &lt;/define&gt;
+  </pre></div></div>
+      </div>
+      <div class="adef-list">
+        <p>
+          <em>Attribute definitions:</em>
+        </p>
+        <dl class="definitions">
+
+          <dt id="ConnectorElementN1Attribute"> 
+            <span class="adef">n1</span> = "<span class="attr-value"><a href="types.html#DataTypeIRI">&lt;IRI&gt;</a></span>" </dt> 
+          <dd>
+            <p>An <a href="intro.html#TermIRIReference"><span class="svg-term">IRI reference</span></a> to an element within an SVG document, which represents the visual and semantic starting point of a connection.  An <a href="intro.html#TermInvalidIRIReference"><span class="svg-term">invalid IRI reference</span></a> is an <a href="intro.html#TermUnsupportedValue"><span class="svg-term">unsupported value</span></a>. An empty attribute value (<span class="attr-value">n1=""</span>) disables rendering of the element. The <a href="intro.html#TermLacunaValue"><span class="svg-term">lacuna value</span></a> is the empty string.</p>
+            <p class="anim-target"><a href="animate.html#Animatable">Animatable</a>: yes.</p>
+          </dd> 
+
+          <dt id="ConnectorElementN1Attribute"> 
+            <span class="adef">n2</span> = "<span class="attr-value"><a href="types.html#DataTypeIRI">&lt;IRI&gt;</a></span>" </dt> 
+          <dd>
+            <p>An <a href="intro.html#TermIRIReference"><span class="svg-term">IRI reference</span></a> to an element within an SVG document, which represents the visual and semantic ending point of a connection.  An <a href="intro.html#TermInvalidIRIReference"><span class="svg-term">invalid IRI reference</span></a> is an <a href="intro.html#TermUnsupportedValue"><span class="svg-term">unsupported value</span></a>. An empty attribute value (<span class="attr-value">n2=""</span>) disables rendering of the element. The <a href="intro.html#TermLacunaValue"><span class="svg-term">lacuna value</span></a> is the empty string.</p>
+            <p class="anim-target"><a href="animate.html#Animatable">Animatable</a>: yes.</p>
+          </dd> 
+
+          <dt id="ConnectorElementN1PortAttribute"> 
+            <span class="adef">n1port</span> = "<span class="attr-value"><a href="types.html#DataTypeIRI">&lt;IRI&gt;</a></span> | <span class="svg-term">&lt;string&gt;</span>" </dt> 
+          <dd>
+            <p>An indicator for selecting a <code>point</code> element which is a child of the element indicated in the <a href="#ConnectorElementN1Attribute"><span class="adef">n1</span></a> attribute, as either an <a href="intro.html#TermIRIReference"><span class="svg-term">IRI reference</span></a> to an <code>id</code> attribute value, or a string corresponding to a <code>role</code> attribute value.  If an appropriate <code>point</code> element exists which matches the value of this attribute, that point shall serve as a candidate for the terminus of the connector stroke for that target element, in a manner described in the <a href="#auto-rendering">Automatic Connector Rendering</a> algorithm.  If this attribute is omitted, or if it does not match the value of an <code>id</code> or <code>role</code> attribute which is a child of the target element, the terminus of the connector stroke for that target element must be the centroid.  The <a href="intro.html#TermLacunaValue"><span class="svg-term">lacuna value</span></a> is the empty string.</p>
+            <p class="anim-target"><a href="animate.html#Animatable">Animatable</a>: yes.</p>
+          </dd> 
+
+          <dt id="ConnectorElementn2PortAttribute"> 
+            <span class="adef">n2port</span> = "<span class="attr-value"><a href="types.html#DataTypeIRI">&lt;IRI&gt;</a></span> | <span class="svg-term">&lt;string&gt;</span>" </dt> 
+          <dd>
+            <p>An indicator for selecting a <code>point</code> element which is a child of the element indicated in the <a href="#ConnectorElementn2Attribute"><span class="adef">n2</span></a> attribute, as either an <a href="intro.html#TermIRIReference"><span class="svg-term">IRI reference</span></a> to an <code>id</code> attribute value, or a string corresponding to a <code>role</code> attribute value.  If an appropriate <code>point</code> element exists which matches the value of this attribute, that point shall serve as a candidate for the terminus of the connector stroke for that target element, in a manner described in the <a href="#auto-rendering">Automatic Connector Rendering</a> algorithm.  If this attribute is omitted, or if it does not match the value of an <code>id</code> or <code>role</code> attribute which is a child of the target element, the terminus of the connector stroke for that target element must be the centroid.  The <a href="intro.html#TermLacunaValue"><span class="svg-term">lacuna value</span></a> is the empty string.</p>
+            <p class="anim-target"><a href="animate.html#Animatable">Animatable</a>: yes.</p>
+          </dd> 
+          
+          <dt><a id="ConnectorDirectedAttribute" name="connectorDirectedAttribute"></a><span class="adef">directed</span> = <span class="attr-value">"false" | "true"</span></dt>
+          <dd>
+            <p>A boolean value for indicating whether the connector is directed, i.e. whether it is a one-way connection.  If the value of this attribute is <span class="attr-value">"true"</span>, then .  Note that the value of this attribute does not automatically render an arrow or directional indicator on the <code>connector</code> element; the author must still provide a suitable graphical shape with the right positioning and orientation properties and apply it to the <code>connector</code> element via the <code>marker-end</code> property.  The <a href="intro.html#TermLacunaValue"><span class="svg-term">lacuna value</span></a> is <span class="attr-value">"false"</span>.</p>
+            <p class="anim-target"><a href="animate.html#Animatable">Animatable</a>: yes.</p>
+          </dd>
+
+          <dt id="ConnectorElementDAttribute"><span class="adef">d</span> = "<span class="attr-value"><a href="types.html#DataTypePathData">&lt;path-data&gt;</a></span>"</dt>
+          <dd>
+            <p>The definition of the stroke of a connector. See <a href="#ConnectorData">Connector data</a>. An empty attribute value (<span class="attr-value">d=""</span>) or missing attribute automates the rendering of the element according to the algorithm in <a href="#auto-rendering">Automatic Connector Rendering</a>. The <a href="intro.html#TermLacunaValue"><span class="svg-term">lacuna value</span></a> is the empty string.</p>
+            <p><span class="anim-target"><a href="animate.html#Animatable">Animatable</a>: yes</span>, but see restrictions described in <a href="#ConnectorDataAnimation">Animating connector data</a>.</p>
+          </dd>
+          
+          <dt id="PathLengthAttribute"><span class="adef">pathLength</span> = "<span class="attr-value"><a href="types.html#DataTypeNumber">&lt;number&gt;</a></span>"</dt>
+          <dd>
+            <p>The authoring length of the connector, in <a href="intro.html#TermUserUnits"><span class="svg-term">user units</span></a>. This value is used to calibrate the user agent's own <a href="paths.html#DistanceAlongAPath">distance-along-a-path</a> calculations with that of the author. The user agent shall scale all distance-along-a-path computations by the ratio of <span class="attr-name">'pathLength'</span> to the user agent's own computed value for total connector length. <span class="attr-name">'pathLength'</span> potentially affects calculations for <a href="animate.html#AnimateMotionElement">motion animation</a> and various <a href="painting.html#StrokeProperties">stroke operations</a>.</p>
+            <p>A negative value is an <a href="intro.html#TermUnsupportedValue"><span class="svg-term">unsupported value</span></a>.</p>
+            <p class="anim-target"><a href="animate.html#Animatable">Animatable</a>: yes.</p>
+          </dd>
+          
+          <dt><a id="ConnectorFocusableAttribute" name="connectorFocusableAttribute"></a><span class="adef">focusable</span> = <span class="attr-value">"true" | "false" | "auto"</span></dt>
+          <dd>
+            <p>See <a href="interact.html#focusable-attr">attribute definition</a> for description.</p>
+            <p class="anim-target"><a href="animate.html#Animatable">Animatable</a>: yes.</p>
+          </dd>
+          
+          <dt>
+            <span class="adef">Navigation Attributes</span>
+          </dt>
+          <dd>
+            <p>See <a href="interact.html#specifyingnavigation">definition</a>.</p>
+          </dd>
+        </dl>
+       
+      </div>
+
+      <h3><a id="auto-rendering" href="#auto-rendering">3.1.1. Automatic Connector Rendering</a></h3>
+      <p>When the <a href="#ConnectorElementDAttribute"><span class="adef">d</span></a> attribute is not specified, the user agent must render the <a>connector</a> element as a line of one or more segments between the elements indicated by the <a href="#ConnectorElementN1Attribute"><span class="adef">n1</span></a> and <a href="#ConnectorElementN2Attribute"><span class="adef">n2</span></a> attributes, passing through the <a>point</a> element children of the <a>connector</a> element in document order, and with the terminus of each end of the connector at the appropriate point of the target elements.</p>
+      
+      <h4><a id="target-points" href="#target-points">Connection Points in Target Elements</a></h4>
+      <p>The <em>target elements</em> of a connector are those elements indicated by the <a href="#ConnectorElementN1Attribute"><span class="adef">n1</span></a> and <a href="#ConnectorElementN2Attribute"><span class="adef">n2</span></a> attributes of the <a>connector</a> element.  By default, an automatically-generated connector terminates at the centroid of a target element.  Markers on the connector, such as arrowheads, may be obscured by the target element if the target element is later in document order than the connector; authors may generically position markers along the connector using the <a>marker</a> element's <a>refX</a> and <a>refX</a> attributes to prevent them from being obscured, though this may leave artifacts of the connector stroke between the end of the marker and the target element.</p>
+      <p>A more sophisticated and visually clear method for indicating the terminus of the connector is to provide connection points on the target shape in the form of <a>point</a> elements.  One or more <a>point</a> elements may be declared as child nodes of the target elements; <a>point</a> child elements are used by the user agent as Each of these <a>point</a> elements may have an <a>id</a> attribute and <a>role</a> attribute which can be used to </p>
+
+      <h4><a id="connector-points" href="#connector-points">Points in the Connector Element</a></h4>
+      <p></p>
+      
+      <ul>
+        <li>If the <a>connector</a> element is missing either or both of the <a href="#ConnectorElementN1Attribute"><span class="adef">n1</span></a> and <a href="#ConnectorElementN2Attribute"><span class="adef">n2</span></a> attributes, the element does not render.</li>
+        <li>If the <a>connector</a> element has a <a href="#"><span class="adef">display</span></a> property value of <code>'none'</code>, the element is not rendered.  Note that the logical connection established by the element still exists, and must be exposed to the user as a navigation option, described below.</li>
+        <li>If the <a>connector</a> element has a <a href="#ConnectorElementDAttribute"><span class="adef">d</span></a> attribute, and that attribute is not the empty string, then the connector must be rendered according to the path commands in that attribute, as if the <a>connector</a> element were a <a>path</a> element with a stroke style as specified on the <a>connector</a> element and a fill style of <code class="attr-value">'none'</code>.  Automatic rendering must not be done, even if the connector does not intersect with one or either of the target elements.</li>
+        <li>If the <a>connector</a> element does not have a <a href="#ConnectorElementDAttribute"><span class="adef">d</span></a> attribute, or the <a href="#ConnectorElementDAttribute"><span class="adef">d</span></a> attribute value is the empty string, the user agent must calculate, render, and maintain a rendered line between the target elements, in a manner conforming to the following steps:
+          <ul>
+            <li>If neither the <a>connector</a> element nor the target element have any <a>point</a> child elements, each terminus of the <a>connector</a> element must be the centroid of the target shape for that end.</li>
+            <li>Otherwise, the user agent must execute the following steps:
+              <ul>
+                <li>If the <a>connector</a> element does not have an If either target element has a <a>point</a> child elements, the terminus of the <a>connector</a> element for that element must be the centroid of the target shape for that end.</li>
+                <li></li>
+              </ul>
+            </li>
+            <li></li>
+          </ul>
+        </li>
+      </ul>
+      
+      
+      <ul>
+        <li></li>
+        <li>
+          <ul>
+            <li></li>
+            <li></li>
+          </ul>
+        </li>
+      </ul>
+      
+      <p class="issue">@@ describe what happens for 'use' elements with child 'point' elements</p>
+      <p class="issue">@@ provide an API to get the start and end points (coordinates and point element) of the automatic connector?</p>
+
+      <p class="issue">@@ add '@r' or '@attraction' to the 'point' element for use in rounded corners on connectors?</p>
+
+      <p class="issue">@@ add '@autoclip' to marker to trim the stroke past the end of the marker?</p>
+
+      <h3><a id="ConnectorDataAnimation" href="#ConnectorDataAnimation">3.1.2 Animating connector data</a></h3>
+      <p>Interpolated connector data animation is only possible when each <a href="svgudom.html#ConnectorNormalization">normalized</a> connector data specification within an animation specification has exactly the same list of connector data commands as the <a href="#DAttribute"><span class="attr-name">'d'</span></a> attribute after <a href="svgudom.html#ConnectorNormalization">normalization</a>. This means that each connector data specification and the <a href="#DAttribute"><span class="attr-name">'d'</span></a> attribute would have the exact same list of commands if normalized as defined in <a href="svgudom.html#ConnectorNormalization">Connector Normalization</a>. If an animation is specified and the list of connector data commands is not the same, then the animation specification must be ignored as <a href="intro.html#TermUnsupportedValue"><span class="svg-term">unsupported</span></a>. The animation engine shall interpolate each parameter to each connector data command separately based upon the attributes on the given <a href="intro.html#TermAnimationElement"><span class="svg-term">animation element</span></a>.</p>
+      <p>Non-interpolated (i.e. <span class="attr-value">calcMode="discrete"</span>) connector data animation is always possible.</p>
+
+
+      <h2><a id="ConnectorData" href="#ConnectorData">4 Connector data</a></h2>
+      <h3><a id="ConnectorDataGeneralInformation" href="#ConnectorDataGeneralInformation">4.1 General information about connector data</a></h3>
+      <p>A connector is defined by including a <a href="#ConnectorElement"><span class="element-name">'connector'</span></a> element which contains a <a href="#DAttribute"><span class="attr-name">'d'</span></a> attribute, where the <a href="#DAttribute"><span class="attr-name">'d'</span></a> attribute contains the <em>moveto</em>, <em>line</em>, <em>curve</em> (both cubic and quadratic Béziers) and <em>closeconnector</em> instructions.</p>
+    </div>
+    
+    <div id="sec-use">
+      <hr />
+      
+      <div class="reference">
+        <p class="warning" id="warning-ref-use"><strong>Warning!</strong> This section is a placeholder for reference, and is not part of the connectors spec.</p>
+        
+      <p> When a <a href="#UseElement"><span class="element-name">'use'</span></a> references another element which is another <a href="#UseElement"><span class="element-name">'use'</span></a> or whose content contains a <a href="#UseElement"><span class="element-name">'use'</span></a> element, then the deep cloning approach described above is recursive. However, a set of references that directly or indirectly reference a element to create a circular dependency is an <a href="intro.html#TermInError"><span class="svg-term">error</span></a>, as described in the <a href="linking.html#IRIReference">References</a> section. </p>
+      <div class="schema">
+      <div class="schemaheader">
+      <strong>Schema:</strong> use<div class="schemasource">
+      <pre>    &lt;define name='use'&gt;
+            &lt;element name='use'&gt;
+              &lt;ref name='use.AT'/&gt;
+              &lt;ref name='use.CM'/&gt;
+            &lt;/element&gt;
+          &lt;/define&gt;
+
+          &lt;define name='use.AT' combine='interleave'&gt;
+            &lt;ref name='svg.Properties.attr'/&gt;
+            &lt;ref name='svg.FocusHighlight.attr'/&gt;
+            &lt;ref name='svg.Core.attr'/&gt;
+            &lt;ref name='svg.Conditional.attr'/&gt;
+            &lt;ref name='svg.Transform.attr'/&gt;
+            &lt;ref name='svg.XLinkEmbed.attr'/&gt;
+            &lt;ref name='svg.Focus.attr'/&gt;
+            &lt;ref name='svg.External.attr'/&gt;
+            &lt;ref name='svg.XY.attr'/&gt;
+          &lt;/define&gt;
+
+          &lt;define name='use.CM'&gt;
+            &lt;zeroOrMore&gt;
+              &lt;choice&gt;
+                &lt;ref name='svg.Desc.group'/&gt;
+                &lt;ref name='svg.Animate.group'/&gt;
+                &lt;ref name='svg.Handler.group'/&gt;
+              &lt;/choice&gt;
+            &lt;/zeroOrMore&gt;
+          &lt;/define&gt;
+      </pre>
+      </div>
+      </div>
+      </div>
+      <div class="adef-list">
+      <p>
+      <em>Attribute definitions:</em>
+      </p> 
+      <dl class="definitions"> 
+      <dt id="UseElementXAttribute"> 
+      <span class="adef">x</span> = "<span class="attr-value"><a href="types.html#DataTypeCoordinate">&lt;coordinate&gt;</a></span>" </dt> 
+      <dd>
+      <p> The x-axis coordinate of one corner of the rectangular region into which the referenced element is placed. </p>
+      <p> The <a href="intro.html#TermLacunaValue"><span class="svg-term">lacuna value</span></a> is <span class="attr-value">'0'</span>. </p>
+      <p class="anim-target">
+      <a href="animate.html#Animatable">Animatable</a>: yes.</p>
+      </dd> 
+      <dt id="UseElementYAttribute"> 
+      <span class="adef">y</span> = "<span class="attr-value"><a href="types.html#DataTypeCoordinate">&lt;coordinate&gt;</a></span>" </dt> 
+      <dd>
+      <p> The y-axis coordinate of one corner of the rectangular region into which the referenced element is placed. </p>
+      <p> The <a href="intro.html#TermLacunaValue"><span class="svg-term">lacuna value</span></a> is <span class="attr-value">'0'</span>. </p>
+      <p class="anim-target">
+      <a href="animate.html#Animatable">Animatable</a>: yes.</p>
+      </dd> 
+      <dt id="UseElementHrefAttribute"> 
+      <span class="adef">xlink:href</span> = "<span class="attr-value"><a href="types.html#DataTypeIRI">&lt;IRI&gt;</a></span>" </dt> 
+      <dd>
+      <p> An <a href="intro.html#TermIRIReference"><span class="svg-term">IRI reference</span></a> to an element/fragment within an SVG document. An <a href="intro.html#TermInvalidIRIReference"><span class="svg-term">invalid IRI reference</span></a> is an <a href="intro.html#TermUnsupportedValue"><span class="svg-term">unsupported value</span></a>. An empty attribute value (<span class="attr-value">xlink:href=""</span>) disables rendering of the element. The <a href="intro.html#TermLacunaValue"><span class="svg-term">lacuna value</span></a> is the empty string. </p>
+      <p class="anim-target">
+      <a href="animate.html#Animatable">Animatable</a>: yes.</p>
+      </dd> 
+      <dt id="UseFocusableAttribute"> 
+      <span class="adef">focusable</span> = <span class="attr-value">"true" | "false" | "auto"</span> 
+      </dt> 
+      <dd>
+      <p> See <a href="interact.html#focusable-attr">attribute definition</a> for description. </p>
+      <p class="anim-target">
+      <a href="animate.html#Animatable">Animatable</a>: yes.</p>
+      </dd> 
+      <dt>
+      <span class="adef">Navigation Attributes</span>
+      </dt> 
+      <dd>
+      <p>See <a href="interact.html#specifyingnavigation">definition</a>.</p>
+      </dd> 
+      </dl> 
+      
+      
+      </div>
+      
+      
+    </div>
+      <hr />
+
+
+    <div id="sec-point-element">
+      <h2><a id="PointElement" href="#PointElement">5 The <span class="element-name">'point'</span> element</a></h2>
+      <p>The <span class="element-name">'point'</span> element defines a point based on a vertical and a horizontal coordinate, within the current <a href="intro.html#TermUserCoordinateSystem"><span class="svg-term">user coordinate system</span></a>.</p>
+      
+      <p>The <span class="element-name">'point'</span> element simply defines a mathematical point, without width or height, and thus does not itself render, regardless of any styling applied to it.  However, if the <a href="painting.html#MarkerProperty"><span class="prop-name">‘marker’</span></a> property is specified on the <span class="element-name">'point'</span> element, the marker will render, and will be affected by any styling applied to the <span class="element-name">'point'</span> element, if applicable.  For example, if the <a href="painting.html#MarkerElement"><span class="element-name">‘marker’</span></a> element indicated by the <a href="painting.html#MarkerProperty"><span class="prop-name">‘marker’</span></a> property has a <a href="painting.html#MarkerUnitsAttribute"><span class="attr-name">‘markerUnits’</span></a> attribute value of <span class="attr-value">'strokeWidth'</span>, the value of the <a href="painting.html#StrokeWidthProperty"><span class="prop-name">‘stroke-width’</span></a> attribute on the <span class="element-name">'point'</span> element will affect the rendering of the marker as if it were also applied to the <span class="element-name">'point'</span> element.  <span class="issue">@@ should we allow the author to control the orientation, as well?  Should it be yoked to the orientation at the same point on the parent shape (I think this is too complicated)?</span></p>
+      
+      <p>This element is intended to serve as a reference point for calculations, orientation, or animations, or for use in direct conjunction with other elements.  It may be declared as a child of any other element, or directly in the root.  When declared as a child of a rendering element, any marker instances for the <span class="element-name">'point'</span> element will be drawn on top of the parent element, in document order.</p>
+      
+      <p>  In the context of the <a>connector</a> element, as described in </p>
+      
+      <!-- <p id="MarkerProperty">The <a href="painting.html#MarkerProperty"><span class="prop-name">‘marker’</span></a> property specifies
+      the marker symbol that shall be used for all points on the sets the
+      value for all vertices on the given <a href="paths.html#PathElement"><span class="element-name">‘path’</span></a> element or
+      <a href="shapes.html">basic shape</a>. It is a short-hand for the three
+      individual marker properties:</p> -->
+      
+      <!-- <p>Within the current <a href="intro.html#TermUserCoordinateSystem"><span class="svg-term">user coordinate system</span></a>,
+      stroking operations on a point begin at the point (cx+r,cy)
+      and then proceed through the points (cx,cy+r), (cx-r,cy), (cx,cy-r) and finally back to (cx+r,cy).
+      For stroking operations, there is only one line segment
+      which has its beginning <a href="painting.html#StrokeLinejoinProperty">joined</a> to its end.</p> -->
+
+      <div class="schema">
+        <div class="schemaheader"><strong>Schema:</strong> point<div class="schemasource"><pre>    &lt;define name='point'&gt;
+        &lt;element name='point'&gt;
+          &lt;ref name='point.AT'/&gt;
+          &lt;zeroOrMore&gt;&lt;ref name='shapeCommon.CM'/&gt;&lt;/zeroOrMore&gt;
+
+        &lt;/element&gt;
+      &lt;/define&gt;
+
+      &lt;define name='point.AT' combine='interleave'&gt;
+        &lt;ref name='svg.ShapeCommon.attr'/&gt;
+        &lt;ref name='svg.XY.attr'/&gt;
+      &lt;/define&gt;
+  </pre></div></div>
+      </div>
+      <div class="adef-list">
+        <p>
+          <em>Attribute definitions:</em>
+        </p>
+        <dl class="definitions">
+          <dt id="PointElementCXAttribute"><span class="adef">x</span> = "<span class="attr-value"><a href="types.html#DataTypeCoordinate">&lt;coordinate&gt;</a></span>"</dt>
+          <dd>
+            <p>The x-axis coordinate of the point.  The <a href="intro.html#TermLacunaValue"><span class="svg-term">lacuna value</span></a> is <span class="attr-value">'0'</span>.</p>
+            <p class="anim-target"><a href="animate.html#Animatable">Animatable</a>: yes.</p>
+          </dd>
+          <dt id="PointElementCYAttribute"><span class="adef">y</span> = "<span class="attr-value"><a href="types.html#DataTypeCoordinate">&lt;coordinate&gt;</a></span>"</dt>
+          <dd>
+            <p>The y-axis coordinate of the point.  The <a href="intro.html#TermLacunaValue"><span class="svg-term">lacuna value</span></a> is <span class="attr-value">'0'</span>.</p>
+            <p class="anim-target"><a href="animate.html#Animatable">Animatable</a>: yes.</p>
+          </dd>
+          <dt><a id="PointFocusableAttribute" name="pointFocusableAttribute"></a><span class="adef">focusable</span> = <span class="attr-value">"true" | "false" | "auto"</span></dt>
+          <dd>
+            <p>See <a href="interact.html#focusable-attr">attribute definition</a> for description.</p>
+            <p class="anim-target"><a href="animate.html#Animatable">Animatable</a>: yes.</p>
+          </dd>
+          <dt>
+            <span class="adef">Navigation Attributes</span>
+          </dt>
+          <dd>
+            <p>See <a href="interact.html#specifyingnavigation">definition</a>.</p>
+          </dd>
+        </dl>
+      </div>
+      <p id="ExamplePoint01"><span class="example-ref">Example point01</span> consists of a <a href="#PointElement"><span class="element-name">'point'</span></a> element which is a child of another element, and styled with a marker.</p>
+      <div class="example">
+        <div class="exampleheader">
+          <strong>Example:</strong>
+          <a href="resources/point-marker.svg">point-marker.svg</a>
+        </div>
+        <div class="examplesource">
+          <pre>
+  &lt;svg xmlns="http://www.w3.org/2000/svg"
+       xmlns:xlink="http://www.w3.org/1999/xlink"
+       width="100%" height="100%" viewBox="0 0 200 150"&gt;
+
+    &lt;title&gt;Point Marker&lt;/title&gt;
+    &lt;desc&gt;Example point01: An illustration of a marker on a 'point' element 
+          which is a child of another element.&lt;/desc&gt;
+
+    &lt;defs&gt;
+      &lt;marker id="dot"
+        viewBox="0 0 10 10" refX="5" refY="5" 
+        markerUnits="strokeWidth"
+        markerWidth="5" markerHeight="5"
+        orient="auto"&gt;
+        &lt;circle cx="5" cy="5" r="2.5" fill="cornflowerblue" stroke="blue" /&gt;
+      &lt;/marker&gt;
+    &lt;/defs&gt;
+
+    &lt;polygon id="decision" points="100,50 150,75 100,100 50,75" stroke="black" fill="gray"&gt;
+      &lt;point x="100" y="50" stroke-width="2" marker="url(#dot)"/&gt;
+    &lt;/polygon&gt;
+  &lt;/svg&gt;
+
+  </pre>
+        </div>
+        <div class="exampleimage">
+          <img alt="Rendering of point-marker.svg" src="resources/point-marker.png" />
+        </div>
+      </div>
+    </div>
+
+    
+    <div id="sec-focus-nav">
+      <h2><a id="focus-nav" href="#focus-nav">6 Focus and navigation</a></h2>
+      <p class="issue" id="issue-focus-nav"><strong>To Do:</strong>  Define behavior for node focus, and navigating between nodes along connectors.  In general, when a user focuses on a node element (which may be keyboard navigation, clicking on it, or perhaps even hovering), all the available connections to other nodes should be presented in some manner, perhaps as an enumerated list or as highlights on the connection paths (and must be exposed in some accessible way), and should use the titles and descriptions of the connections and possibly those of the connected node; in other words, it should be presented similar to a hyperlink <em>(for reference, see grayed-out sections below for temporary excerpts focus and navigation in SVGT 1.2)</em>.</p>
+    </div>
+    
+    <hr />
+    <div class="reference">
+      <p class="warning" id="warning-ref-nav-ref"><strong>Warning!</strong> This section is a placeholder for reference, and is not part of the connectors spec.</p>
+      
+    <div id="sec-focus-nav-ref">
+      <h2><a id="focus" href="#focus">13.12 Element focus</a></h2>
+
+          <h3><a id="focusable-attr">13.12.1 The <span class="attr-name" href="#focusable-attr">13.12.1 The <span class="attr-name">'focusable'</span> attribute</a></h3>
+
+          <p>
+          In many cases, such as text editing, the user is required to place focus on a particular element, ensuring that input events, such as keyboard input, are sent to that element.
+          </p>
+
+          <p>
+            All renderable elements are required to be able to accept focus if specified by the author, including <a href="intro.html#TermContainerElement"><span class="svg-term">container elements</span></a> (except <a href="struct.html#DefsElement"><span class="element-name">'defs'</span></a>), <a href="intro.html#TermGraphicsElement"><span class="svg-term">graphics elements</span></a>, <a href="text.html#TSpanElement"><span class="element-name">'tspan'</span></a> and <a href="extend.html#ForeignObjectElement"><span class="element-name">'foreignObject'</span></a>. A focusable <a href="intro.html#TermContainerElement"><span class="svg-term">container element</span></a> may contain focusable descendants.
+          </p>
+
+
+           <div class="adef-list">
+
+            <p><em>Attribute definition:</em></p>
+
+            <dl class="definitions">
+              <dt><a id="FocusableAttribute" name="focusableAttribute"></a> <span class="adef">focusable</span> = <span class="attr-value">"true" | "false" | "auto"</span></dt>
+
+              <dd><p>Defines if an element can get keyboard focus (i.e. receive keyboard events) and be a target for field-to-field navigation actions. (Note: in some environments, field-to-field navigation can be accomplished with the tab key.)</p>
+                <p>The attribute value can be one of the following:</p>
+                        <dl class="definitions">
+                          <dt class="attr-value">true</dt>
+                          <dd>The element is keyboard-aware and must be treated as any other UI component that can get focus.</dd>
+                          <dt class="attr-value">false</dt>
+
+                          <dd>The element is not focusable.</dd>
+                     <dt class="attr-value">auto</dt>
+                     <dd><p>The <a href="intro.html#TermLacunaValue"><span class="svg-term">lacuna value</span></a>. Equivalent to <span class="attr-value">'false'</span>, except that it must be treated like <span class="attr-value">'true'</span> for the following cases:</p>
+                        <ul>
+
+                           <li>
+                             <p>The <a href="linking.html#AElement"><span class="element-name">'a'</span></a> element.</p>
+                           </li>
+                           <li>
+                             <p><a href="intro.html#TermTextContentBlockElement"><span class="svg-term">Text content block elements</span></a> with <a href="text.html#editable-attribute"><span class="attr-name">'editable'</span></a> set to <span class="attr-value">'simple'</span>.</p>
+
+                           </li>
+                           <li>
+                             <p>Elements that are the target of an <a href="animate.html#Animation.class">animation</a> whose <a href="animate.html#TimingAttributes">begin or end lists</a> include an eventbase timing specifier triggered by the following <a href="#UIEvents">user interface events</a>: <a href="#FocusInEvent"><code>DOMFocusIn</code></a>, <a href="#FocusOutEvent"><code>DOMFocusOut</code></a>, <a href="#ActivateEvent"><code>DOMActivate</code></a>.</p>
+
+                           </li>
+                           <li>
+                             <p>Elements that have an event listener registered on one of the following <a href="#UIEvents">user interface events</a>: <a href="#FocusInEvent"><code>DOMFocusIn</code></a>, 
+                               <a href="#FocusOutEvent"><code>DOMFocusOut</code></a>, <a href="#ActivateEvent"><code>DOMActivate</code></a>.</p>
+                             <p><em>Informative note:</em> Event listeners for the listed events can be added to elements that are the <a href="script.html#target-attr"><span class="attr-name">'target'</span></a> or <a href="script.html#observer-attr"><span class="attr-name">'observer'</span></a> 
+                           of a <a href="script.html#ListenerElement"><span class="element-name">'listener'</span></a> element, the parent element of a <a href="script.html#HandlerElement"><span class="element-name">'handler'</span></a> element
+                           if it has an <a href="script.html#HandlerEventAttribute"><span class="attr-name">'ev:event'</span></a> attribute as well as by using script.</p>
+
+                           </li>
+                        </ul>
+                     </dd>
+                   </dl>
+               <p class="anim-target"><a href="animate.html#Animatable">Animatable</a>: yes.</p></dd>
+         </dl>
+       </div>
+
+          <h2><a id="navigation" href="#navigation">13.13 Navigation</a></h2>
+
+          <h3><a id="navigationbehaviour" href="#navigationbehaviour">13.13.1 Navigation behavior</a></h3>
+
+          <p>
+            System-dependent input facilities (e.g., the tab key on most desktop
+            computers) should be supported to allow navigation between elements that
+            can obtain focus (i.e. elements for which the value of the
+            <a href="#FocusableAttribute"><span class="attr-name">'focusable'</span></a>
+            attribute is <span class="attr-value">'true'</span>).
+          </p>
+
+          <p>
+            The document has the concept of a focus ring, which is the
+            order in which elements obtain focus. By default the focus
+            ring shall be obtained using document order. All focusable elements
+            must be part of the default focus ring.
+            A document's focus ring includes any focusable objects within shadow trees
+            for <a href="struct.html#UseElement"><span class="element-name">'use'</span></a> elements.
+            The <a href="interact.html#specifyingnavigation">focus attributes</a> may be used to modify the default focus ring.
+          </p>
+
+          <p>
+          The SVG language supports a flattened notion of field navigation between focusable elements where an author may define field navigation between any two focusable elements defined within a given SVG document without regard to document hierarchy. For example:
+          </p>
+
+          <pre>    &lt;rect xml:id="r1" focusable="true" .../&gt;
+          &lt;g xml:id="g1" focusable="true"&gt;
+            &lt;circle xml:id="c1" focusable="true" .../&gt;
+          &lt;/g&gt;</pre>
+
+          <p> In the above example, the author may specify field-to-field
+          navigation such the user can navigate directly from any
+          of the three elements. Thus, assuming a desktop computer which
+          uses the tab key for field navigation, the author may specify
+          focus navigation order such that the tab key takes the user from
+          "r1" to "c1" to "g1".  </p>
+
+          <p>When navigating to an element that is not visible on the <a href="intro.html#TermCanvas"><span class="svg-term">canvas</span></a> the following rules shall apply:</p>
+          <ul>
+            <li><p>The <a href="intro.html#TermSVGUserAgent"><span class="svg-term">SVG user agent</span></a> must not navigate to an element which has <span class="attr-value">display="none"</span>. (An element which has <span class="attr-value">display="none"</span> is not focusable.)</p></li>
+
+            <li><p>The <a href="intro.html#TermSVGUserAgent"><span class="svg-term">SVG user agent</span></a> must allow navigation to elements which are not visible (i.e. which has a 100% transparency or which is hidden by another element).</p></li>
+            <li><p>The <a href="intro.html#TermSVGUserAgent"><span class="svg-term">SVG user agent</span></a> must allow navigation to elements which are located outside of the current <a href="intro.html#TermViewport"><span class="svg-term">viewport</span></a>. In this case it is recommended that the <a href="intro.html#TermSVGUserAgent"><span class="svg-term">SVG user agent</span></a> should change the current viewport so that the focused element becomes visible.</p></li>
+
+          </ul>
+
+          <p>
+          SVG's flattened notion of field navigation shall extend to referenced content and shadow trees as follows:
+          </p>
+
+          <ul>
+          <li>
+            <p>Focusable elements within the content referenced by a <a href="struct.html#UseElement"><span class="element-name">'use'</span></a> element
+          participate in field navigation operations using the flattened focus
+          model. (Note: If a referenced group contains a focusable element,
+          and that group is referenced by two <a href="struct.html#UseElement"><span class="element-name">'use'</span></a> elements, then the document
+          will have two separate focusable fields, not just one.)</p>
+
+          </li>
+          <li>
+            <p>If an <a href="multimedia.html#AnimationElement"><span class="element-name">'animation'</span></a> element references an SVG document, then all of the
+          focusable fields defined within the referenced SVG document
+          participate in field navigation operations using the flattened focus
+          model.</p>
+          </li>
+          </ul>
+
+          <p>
+
+            Focus navigation shall behave as specified:
+          </p>
+
+          <ol>
+            <li><p>
+         When the document is loaded the focus is first offered
+         to the <a href="intro.html#TermSVGUserAgent"><span class="svg-term">SVG user agent</span></a>.</p>
+            </li>
+            <li>
+
+              <p>Once the <a href="intro.html#TermSVGUserAgent"><span class="svg-term">SVG user agent</span></a> releases focus, then
+         focus passes to the entity that
+         first matches the following criteria:</p>
+         <ol>
+           <li>
+             the <a href="intro.html#TermRootmostSVGElement"><span class="svg-term">rootmost 'svg' element</span></a> if it is focusable,
+           </li>
+           <li>
+
+             the element referenced by the <a href="#NavNextAttribute"><span class="attr-name">'nav-next'</span></a>
+             attribute on the <a href="intro.html#TermRootmostSVGElement"><span class="svg-term">rootmost 'svg' element</span></a>, if the
+             attribute is present,
+           </li>
+           <li>
+             the first focusable element in the document
+             starting from the <a href="intro.html#TermRootmostSVGElement"><span class="svg-term">rootmost 'svg' element</span></a>,
+           </li>
+           <li>
+
+             the <a href="intro.html#TermSVGUserAgent"><span class="svg-term">SVG user agent</span></a>
+           </li>
+         </ol>
+            </li>
+            <li>
+              <p>If the focus is held by an element in the
+         document, then the next element in navigation order shall be
+         the entity that first matches the following
+         criteria:</p>
+         <ol>
+
+           <li>
+             the element referenced by the <a href="#NavNextAttribute"><span class="attr-name">'nav-next'</span></a>
+             attribute on the focused element,
+           </li>
+           <li>
+             the next focusable element in document order,
+           </li>
+           <li>
+             the <a href="intro.html#TermSVGUserAgent"><span class="svg-term">SVG user agent</span></a>
+
+           </li>
+         </ol>
+            </li>
+            <li>
+              <p>If the focus is held by an element in the
+         document, then the previous element in navigation
+         order shall be
+         the entity that first matches the following
+         criteria:</p>
+         <ol>
+           <li>
+             the element referenced by the <a href="#NavPrevAttribute"><span class="attr-name">'nav-prev'</span></a>
+
+             attribute on the focused element,
+           </li>
+           <li>
+             the previous focusable element in document order,
+           </li>
+           <li>
+             the <a href="intro.html#TermSVGUserAgent"><span class="svg-term">SVG user agent</span></a>
+           </li>
+         </ol>
+
+            </li>
+          </ol>
+
+          <p>
+            For stand-alone SVG documents, the <a href="intro.html#TermSVGUserAgent"><span class="svg-term">SVG user agent</span></a> must always have a currently
+            focused object. If focus is not held by any object in the document tree, the
+            <a href="intro.html#TermSVGUserAgent"><span class="svg-term">SVG user agent</span></a> must give focus to the <a href="svgudom.html#svg__SVGDocument" class="udom-interface-name">SVGDocument</a> object.
+          </p>
+
+          <p>
+            For SVG documents which are referenced by a non-SVG host document (e.g.,
+            XHTML), the SVG document may participate within the host document's focus
+            ring, which would allow direct navigation from an SVG focusable element
+            onto a focusable element within the host document.
+            Other compound document specifications may define supplemental SVG focus navigation rules for
+            situations when SVG content is used as a component within a compound document.
+          </p>
+
+          <p>
+            User agents should provide a mechanism for a user to escape from a focus ring.
+            When the user activates this mechanism, the user agent should change focus to
+            the user agent, sending the appropriate <a href="#FocusOutEvent"><code>focusout</code></a>
+            event to the element currently in focus.
+          </p>
+
+          <h3><a id="specifyingnavigation" href="#specifyingnavigation">13.13.2 Specifying navigation</a></h3>
+
+          <p>
+            Navigation order can be specified using the ten
+            <a href="intro.html#TermNavigationAttribute"><span class="svg-term">navigation attributes</span></a>
+            defined below.
+          </p>
+
+          <div class="adef-left">
+            <p><em>Attribute definitions:</em></p>
+
+            <dl class="definitions">
+              <dt id="NavNextAttribute"><span class="adef">nav-next</span>,</dt>
+              <dt id="NavPrevAttribute"><span class="adef">nav-prev</span> = <span class="attr-value">"<a href="types.html#DataTypeFuncIRI">&lt;FuncIRI&gt;</a>" | "auto" | "self"</span></dt>
+              <dd>
+                <p>
+
+                  Specifies the next element (when using <a href="#NavNextAttribute"><span class="attr-name">'nav-next'</span></a>)
+                  or previous element (when using <a href="#NavPrevAttribute"><span class="attr-name">'nav-prev'</span></a>)
+                  in the focus ring.
+                </p>
+                <p>
+                  The attribute value for <a href="#NavNextAttribute"><span class="attr-name">'nav-next'</span></a>
+                  and <a href="#NavPrevAttribute"><span class="attr-name">'nav-prev'</span></a>
+
+                  can be one of the following:
+                </p>
+                 <dl class="definitions">
+                   <dt class="attr-value"><a href="types.html#DataTypeFuncIRI">&lt;FuncIRI&gt;</a></dt>
+                   <dd>Specifies the element that must receive focus when navigation in the next direction (for <a href="#NavNextAttribute"><span class="attr-name">'nav-next'</span></a>) or previous direction (for <a href="#NavPrevAttribute"><span class="attr-name">'nav-prev'</span></a>) is triggered. The specified element must be within the <a href="intro.html#TermCurrentSVGDocumentFragment"><span class="svg-term">current SVG document fragment</span></a>.</dd>
+
+                   <dt class="attr-value">auto</dt>
+                   <dd>The <a href="intro.html#TermLacunaValue"><span class="svg-term">lacuna value</span></a>. Means that the behavior shall be as if the attribute was not specified
+                   (navigation must follow the rules specified in <a href="#navigationbehaviour">Navigation behavior</a>).
+                   </dd>
+                   <dt class="attr-value">self</dt>
+                   <dd>The focus must stay on the element itself.</dd>
+                 </dl>
+
+                 <p class="anim-target"><a href="animate.html#Animatable">Animatable</a>: yes.</p>
+              </dd>
+              <dt id="NavUpAttribute"><span class="adef">nav-up</span>,</dt>
+              <dt id="NavUpRightAttribute"><span class="adef">nav-up-right</span>,</dt>
+              <dt id="NavRightAttribute"><span class="adef">nav-right</span>,</dt>
+
+              <dt id="NavDownRightAttribute"><span class="adef">nav-down-right</span>,</dt>
+              <dt id="NavDownAttribute"><span class="adef">nav-down</span>,</dt>
+              <dt id="NavDownLeftAttribute"><span class="adef">nav-down-left</span>,</dt>
+              <dt id="NavLeftAttribute"><span class="adef">nav-left</span>,</dt>
+              <dt id="NavUpLeftAttribute"><span class="adef">nav-up-left</span> = <span class="attr-value">"<a href="types.html#DataTypeFuncIRI">&lt;FuncIRI&gt;</a>" | "auto" | "self"</span></dt>
+
+              <dd>
+                <p>
+                  Each of these eight attributes specifies an element to receive
+                  focus when navigating in a particular direction.  For each of
+                  the attributes, the direction for which an element is being
+                  specified for navigation is suggested by the name of the attribute.
+                  The following table lists these directions explicitly:
+                </p>
+                <table class="multi-column-table top-left-aligned" summary="Table listing the navigation direction each of the eight directional navigation properties specify.">
+                  <tbody><tr>
+                    <th>Attribute name</th>
+                    <th>Direction</th>
+
+                  </tr>
+                  <tr class="odd">
+                    <td><span class="attr-name">'nav-up'</span></td>
+                    <td>↑ upward</td>
+                  </tr>
+                  <tr class="even">
+                    <td><span class="attr-name">'nav-up-right'</span></td>
+
+                    <td>↗ up-and-rightward</td>
+                  </tr>
+                  <tr class="odd">
+                    <td><span class="attr-name">'nav-right'</span></td>
+                    <td>→ rightward</td>
+                  </tr>
+                  <tr class="even">
+
+                    <td><span class="attr-name">'nav-down-right'</span></td>
+                    <td>↘ down-and-rightward</td>
+                  </tr>
+                  <tr class="odd">
+                    <td><span class="attr-name">'nav-down'</span></td>
+                    <td>↓ downward</td>
+                  </tr>
+
+                  <tr class="even">
+                    <td><span class="attr-name">'nav-down-left'</span></td>
+                    <td>↙ down-and-leftward</td>
+                  </tr>
+                  <tr class="odd">
+                    <td><span class="attr-name">'nav-left'</span></td>
+                    <td>← leftward</td>
+
+                  </tr>
+                  <tr class="even">
+                    <td><span class="attr-name">'nav-up-left'</span></td>
+                    <td>↖ up-and-leftward</td>
+                  </tr>
+                </tbody></table>
+                <p>
+                  The value for each of these attributes can be one of the following:
+                </p>
+
+                 <dl class="definitions">
+                   <dt class="attr-value"><a href="types.html#DataTypeFuncIRI">&lt;FuncIRI&gt;</a></dt>
+                   <dd>Specifies the element that must receive focus when navigation in the given direction is triggered. The specified element must be within the <a href="intro.html#TermCurrentSVGDocumentFragment"><span class="svg-term">current SVG document fragment</span></a>.</dd>
+                   <dt class="attr-value">auto</dt>
+                   <dd>The <a href="intro.html#TermLacunaValue"><span class="svg-term">lacuna value</span></a>. Means that the behavior is left up to the <a href="intro.html#TermSVGUserAgent"><span class="svg-term">SVG user agent</span></a>.
+                   </dd>
+
+                   <dt class="attr-value">self</dt>
+                   <dd>The focus must stay on the element itself.</dd>
+                 </dl>
+                 <p class="anim-target"><a href="animate.html#Animatable">Animatable</a>: yes.</p>
+              </dd>
+            </dl>
+          </div>
+
+          <div class="example"><div class="exampleheader"><strong>Example:</strong> <a href="examples/navigation.svg">navigation.svg</a></div><div class="examplesource"><pre>&lt;svg xmlns="http://www.w3.org/2000/svg" 
+           xmlns:xlink="http://www.w3.org/1999/xlink" 
+           version="1.2" baseProfile="tiny" 
+           viewBox="0 0 220 40"&gt;
+
+        &lt;title&gt;Media Channel Navigation User Interface&lt;/title&gt;
+        &lt;desc&gt;An example which illustrates the use of nav-* attributes&lt;/desc&gt;
+
+        &lt;!-- List of available channels --&gt;
+        &lt;rect x="0" y="0" width="100" height="20" fill="#fb0" stroke="#000" stroke-width="2" /&gt;
+        &lt;text x="50" y="13" font-size="8" font-family="Arial Black" 
+              fill="#fff" text-anchor="middle"&gt;Channel 1&lt;/text&gt;
+        &lt;rect x="0" y="20" width="100" height="20" fill="#fb0" stroke="#000" stroke-width="2" /&gt;
+        &lt;text x="50" y="33" font-size="8" font-family="Arial Black" 
+              fill="#fff" text-anchor="middle"&gt;Channel 2&lt;/text&gt;
+
+        &lt;rect x="0" y="40" width="100" height="20" fill="#fb0" stroke="#000" stroke-width="2" /&gt;
+        &lt;text x="50" y="53" font-size="8" font-family="Arial Black" 
+              fill="#fff" text-anchor="middle"&gt;Channel 3&lt;/text&gt;
+
+        &lt;!-- List of programs for channel nb 1 --&gt;
+        &lt;g xml:id="Chan1Prog1" focusable="true" nav-left="self" nav-right="url(#Chan1Prog2)" 
+           nav-up="self" nav-down="url(#Chan2Prog1)"&gt;
+          &lt;rect x="100" y="0" width="100" height="20" fill="#fd0" stroke="#000" stroke-width="2"&gt;
+
+            &lt;set attributeName="fill" begin="Chan1Prog1.focusin" end="Chan1Prog1.focusout" to="#fa0"/&gt;
+          &lt;/rect&gt;
+          &lt;text x="150" y="13" font-size="8" font-family="Arial Black" 
+                fill="#fff" text-anchor="middle"&gt;Weather&lt;/text&gt;
+        &lt;/g&gt;
+        &lt;g xml:id="Chan1Prog2" focusable="true" nav-left="url(#Chan1Prog1)" nav-right="url(#Chan1Prog3)" 
+           nav-up="self" nav-down="auto"&gt;
+
+          &lt;rect x="200" y="0" width="120" height="20" fill="#fd0" stroke="#000" stroke-width="2"&gt;
+            &lt;set attributeName="fill" begin="Chan1Prog2.focusin" end="Chan1Prog2.focusout" to="#fa0"/&gt;
+          &lt;/rect&gt;
+          &lt;text x="260" y="13" font-size="8" font-family="Arial Black" 
+                fill="#fff" text-anchor="middle"&gt;The news&lt;/text&gt;
+        &lt;/g&gt;
+
+        &lt;g xml:id="Chan1Prog3" focusable="true" nav-left="url(#Chan1Prog2)" nav-right="self" 
+           nav-up="self" nav-down="auto" nav-next="self"&gt;
+          &lt;rect x="320" y="0" width="120" height="20" fill="#fd0" stroke="#000" stroke-width="2"&gt;
+            &lt;set attributeName="fill" begin="Chan1Prog3.focusin" end="Chan1Prog3.focusout" to="#fa0"/&gt;
+          &lt;/rect&gt;
+          &lt;text x="380" y="13" font-size="8" font-family="Arial Black" 
+                fill="#fff" text-anchor="middle"&gt;Football&lt;/text&gt;
+
+        &lt;/g&gt;
+
+        &lt;!-- List of programs for channel nb 2 --&gt;
+        &lt;g xml:id="Chan2Prog1" focusable="true" nav-left="self" nav-right="auto" 
+           nav-up="url(#Chan1Prog1)" nav-down="auto" nav-prev="url(#Chan1Prog1)" nav-next="auto"&gt;
+          &lt;rect x="100" y="20" width="150" height="20" fill="#fd0" stroke="#000" stroke-width="2"&gt;
+            &lt;set attributeName="fill" begin="Chan2Prog1.focusin" end="Chan2Prog1.focusout" to="#fa0"/&gt;
+          &lt;/rect&gt;
+
+          &lt;text x="175" y="33" font-size="8" font-family="Arial Black" 
+                fill="#fff" text-anchor="middle"&gt;Long Movie&lt;/text&gt;
+        &lt;/g&gt;
+      &lt;/svg&gt; </pre></div></div>
+
+         <p>This example illustrates how it is possible for an author to control
+      the focus order between several focusable elements displayed on the <a href="intro.html#TermCanvas"><span class="svg-term">canvas</span></a>.</p>
+
+         <p>On a device which provides a 2-way navigation system (a TAB
+      mechanism for instance), here are the interesting behaviors:</p>
+          <ul>
+            <li><p>Whenever the focus is located on a program which is at the beginning of the timeline of a given channel, there are 3 options when the user wants to go to the previous focusable item (i.e., the user presses the "Reverse-Tab" key on most desktop computers):</p>
+              <ul>
+                <li>option 1: the focus goes up to the first program of the previous channel</li>
+                <li>option 2: the focus goes up to the last program of the previous channel</li>
+
+                <li>option 3: the focus remains at the same place</li>
+              </ul>
+              <p>Here, in this example, for channel 2, because there is <span class="attr-value">nav-prev="url(#Chan1Prog1)"</span> attribute in element <a href="struct.html#GElement"><span class="element-name">'g'</span></a> with <span class="attr-value">id="Chan2Prog1"</span>, option 1 will be applied.</p>
+          <p>In order to apply option 2, we could have set <span class="attr-value">nav-prev="url(#Chan1Prog3)"</span> instead.</p>
+
+          <p>In order to apply option 3, we could have set <span class="attr-value">nav-prev="self"</span> instead.</p>
+            </li>
+
+            <li><p>Whenever the focus is located on a program which is at the end of the timeline of a given channel, there are 2 options when the user wants to go to the next focusable item (i.e., the user presses the "Tab" key on most desktop computers):</p>
+              <ul>
+                <li>option 1: the focus goes down to the first program of the next channel</li>
+
+                <li>option 2: the focus remains at the same place</li>
+              </ul>
+              <p>Here, in this example, for channel 1, because there is <span class="attr-value">nav-next="self"</span> attribute in element <a href="struct.html#GElement"><span class="element-name">'g'</span></a> with <span class="attr-value">id="Chan1Prog3"</span>, option 2 will be applied.</p>
+          <p>In order to apply option 1, we could have set <span class="attr-value">nav-next="url(#Chan2Prog1)"</span> instead.</p>
+
+            </li>
+
+            <li><p>Whenever the focus is located on <code>"Chan2Prog1"</code> container, if the user wants to go to the next focusable element, the concept of a focus ring will apply because of value <span class="attr-value">nav-next="auto"</span>. Here, according to the focus ring navigation rules, focus will be offered to the <a href="intro.html#TermSVGUserAgent"><span class="svg-term">SVG user agent</span></a> because there is no more focusable element in the document order.</p>
+            </li>
+          </ul>
+
+         <p>On a device which provides a 4-way navigation system (i.e. a joystick
+      for instance), here are the interesting behaviors:</p>
+          <ul>
+            <li><p>Whenever the focus is located at the beginning of the timeline of a given channel, when the user wants to go "Left", focus remains on the same element because both element <a href="struct.html#GElement"><span class="element-name">'g'</span></a> with <span class="attr-value">id="Chan1Prog1"</span> and element <a href="struct.html#GElement"><span class="element-name">'g'</span></a> with <span class="attr-value">id="Chan2Prog1"</span> have <span class="attr-value">nav-left="self"</span>.</p>
+
+            </li>
+            <li><p>Whenever the focus is located on <code>"Chan1Prog1"</code> container, if the user wants to go 'Right', the focus will be put on container element <code>"Chan1Prog2"</code> because of the <span class="attr-value">nav-right="url(#Chan1Prog2)"</span> value. But, because some part of <code>"Chan1Prog2"</code> bounding box is outside of the current <a href="intro.html#TermViewport"><span class="svg-term">viewport</span></a>, the <a href="intro.html#TermSVGUserAgent"><span class="svg-term">SVG user agent</span></a> should change the current <a href="intro.html#TermViewport"><span class="svg-term">viewport</span></a> so that the new focused element becomes visible.</p>
+
+            <table summary="Example navigation.svg" class="images">
+            <tbody><tr>
+              <td width="300"><img alt="Example navigation - before element Chan1Prog1 receives focus" src="images/focus/navigation_a.png" width="300"></td>
+              <td width="20">&nbsp;</td>
+              <td width="300"><img alt="Example navigation - after element Chan1Prog2 receives focus" src="images/focus/navigation_b.png" width="300"></td>
+            </tr>
+            <tr>
+            <td width="300"><span class="table-heading-1">Before element <code>"Chan1Prog2"</code> receives focus</span></td>
+
+            <td width="20">&nbsp;</td>
+            <td width="300"><span class="table-heading-1">After element <code>"Chan1Prog2"</code> receives focus (UA scrolls automatically)</span></td>
+            </tr>
+          </tbody></table>
+            </li>
+            <li><p>On element <a href="struct.html#GElement"><span class="element-name">'g'</span></a> with <span class="attr-value">id="Chan2Prog1"</span>, there is a value <span class="attr-value">nav-right="auto"</span>. This value is the default one for <a href="intro.html#TermNavigationAttribute"><span class="svg-term">navigation attributes</span></a> and therefore the behavior is the same as if no <a href="#NavRightAttribute"><span class="attr-name">'nav-right'</span></a> attribute was defined. This value <span class="attr-value">'auto'</span> means that it's up to the <a href="intro.html#TermSVGUserAgent"><span class="svg-term">SVG user agent</span></a> to choose which focusable element should receive focus when the user wants to go 'right'.</p>
+
+            </li>
+      </ul>
+          <h3><a id="specifyingfocushighlight" href="#specifyingfocushighlight">13.13.3 Specifying focus highlighting</a></h3>
+
+          <p>
+            Automated highlighting upon focus can be specified using the <a href="#FocusHighlight"><span class="attr-name">'focusHighlight'</span></a> attribute. This hint indicates whether the <a href="intro.html#TermSVGUserAgent"><span class="svg-term">SVG user agent</span></a> should highlight an element on focus. The highlighting method is implementation dependent and the <a href="intro.html#TermSVGUserAgent"><span class="svg-term">SVG user agent</span></a> should pick a method that works well for varying content. This attribute is available on all graphical and container elements.
+          </p>
+
+          <div class="adef-list">
+
+             <dl class="definitions">
+             <dt><a id="FocusHighlight" name="focusHighlight"></a> <span class="adef">focusHighlight</span> = <span class="attr-value">"auto" | "none"</span></dt>
+             <dd><p>Specifies whether a <a href="intro.html#TermSVGUserAgent"><span class="svg-term">SVG user agent</span></a> should highlight an element on focus.</p>
+
+               <p>The attribute value can be one of the following:</p>
+             <dl class="definitions">
+             <dt class="attr-value">auto</dt>
+             <dd><p>The <a href="intro.html#TermLacunaValue"><span class="svg-term">lacuna value</span></a>. This indicates that the element should be highlighted on focus. The highlighting method is left up to the <a href="intro.html#TermSVGUserAgent"><span class="svg-term">SVG user agent</span></a>.</p>
+             </dd>
+
+             <dt class="attr-value">none</dt>
+             <dd><p>The <a href="intro.html#TermSVGUserAgent"><span class="svg-term">SVG user agent</span></a> should not highlight this element on focus.</p></dd>
+        </dl>
+         <p class="anim-target"><a href="animate.html#Animatable">Animatable</a>: no.</p></dd>
+        </dl>
+
+          </div>
+
+          <div class="example"><div class="exampleheader"><strong>Example:</strong> <a href="examples/focusHighlight.svg">focusHighlight.svg</a></div><div class="examplesource"><pre>&lt;?xml version="1.0"?&gt;
+      &lt;svg xmlns="http://www.w3.org/2000/svg"
+           xmlns:xlink='http://www.w3.org/1999/xlink'
+           version="1.2" baseProfile="tiny" viewBox="0 0 210 80"&gt;
+
+        &lt;desc&gt;An example which illustrates the use of focusHighlight attribute&lt;/desc&gt;
+
+        &lt;text x="5" y="10"&gt;Do you want to validate transaction ?&lt;/text&gt;
+        &lt;text x="5" y="25"&gt;You may read &lt;a xlink:href="http://www.example.org/pay"
+                             &gt;this&lt;/a&gt; and &lt;a xlink:href="http://www.example.org/infos"&gt;that&lt;/a&gt;
+
+        &lt;/text&gt;
+
+        &lt;a xml:id="ValidateButton" transform="translate(5,40)" focusHighlight="none" xlink:href="validate.htm"&gt;
+          &lt;rect x="0" y="0" width="90" height="20" fill="#0f0" stroke="#000" stroke-width="2"&gt;
+            &lt;set attributeName="fill" begin="ValidateButton.focusin" end="ValidateButton.focusout" to="#0a0"/&gt;
+          &lt;/rect&gt;
+          &lt;text x="45" y="13" font-size="8" font-family="Arial Black"  
+                fill="#000" text-anchor="middle"&gt;Validate&lt;/text&gt;
+
+        &lt;/a&gt;
+        &lt;a xml:id="AbortButton" transform="translate(100,40)" focusHighlight="none" xlink:href="abort.htm"&gt;
+          &lt;rect x="0" y="0" width="90" height="20" fill="#f00" stroke="#000" stroke-width="2"&gt;
+            &lt;set attributeName="fill" begin="AbortButton.focusin" end="AbortButton.focusout" to="#a00"/&gt;
+          &lt;/rect&gt;
+          &lt;text x="45" y="13" font-size="8" font-family="Arial Black" 
+                fill="#000" text-anchor="middle"&gt;Abort&lt;/text&gt;
+
+        &lt;/a&gt;
+
+      &lt;/svg&gt;
+      </pre></div><div class="exampleimage"><img alt="Rendering of focusHighlight.svg" src="examples/focusHighlight.png"></div></div>
+
+         <p>In the above SVG example:</p>
+          <ul>
+            <li><p>Highlight of the focus on the first two textual links is left up to
+      the <a href="intro.html#TermSVGUserAgent"><span class="svg-term">SVG user agent</span></a> (underline the text, highlight of the bounding
+      box, change color of the text, ...) since the <a href="intro.html#TermLacunaValue"><span class="svg-term">lacuna value</span></a> is <span class="attr-value">focusHighlight="auto"</span>. This
+      text may have been retrieved from a database where there may be no
+      notion of graphical styling or no way to know in advance the kind of
+      focusable elements it contains, therefore the author doesn't handle
+      focus highlight on that part of the document.</p></li>
+
+            <li><p>Highlight of the focus on the two graphical buttons is designed by
+      the author and therefore the <a href="intro.html#TermSVGUserAgent"><span class="svg-term">SVG user agent</span></a> doesn't need to highlight
+      it as well. Therefore, <span class="attr-value">focusHighlight="none"</span> is used to disable the
+      default focus highlight behavior.</p></li>
+          </ul>
+
+          <h3><a id="focus-api" href="#focus-api">13.13.4 Obtaining and listening to focus programmatically</a></h3>
+
+          <p>
+          When the user agent gives an element focus it receives a <a href="#FocusInEvent"><code>DOMFocusIn</code></a> event which has the new focused object as the event target and a <a href="#FocusOutEvent"><code>DOMFocusOut</code></a> event which has the previously focused object as the event target.
+          </p>
+
+          <p>The <a href="svgudom.html#svg__SVGSVGElement" class="udom-interface-name">SVGSVGElement</a> interface has a <a href="svgudom.html#svg__SVGSVGElement_setFocus"><code>setFocus</code></a> method that puts the focus on the requested object.
+          Calling <a href="svgudom.html#svg__SVGSVGElement_setFocus"><code>setFocus</code></a> with an element that is not focusable causes focus to stay on the currently focused object.
+          </p>
+
+          <p>
+          The <a href="svgudom.html#svg__SVGSVGElement" class="udom-interface-name">SVGSVGElement</a> interface has a <a href="svgudom.html#svg__SVGSVGElement_moveFocus"><code>moveFocus(short motionType)</code></a> which moves current focus to a different object based on the value of <code>motionType</code>.
+          </p>
+
+          <p>
+
+          <a href="intro.html#TermSVGUserAgent"><span class="svg-term">SVG user agents</span></a> which support pointer devices such as a mouse must allow users to put focus onto focusable elements. For example, it should be possible to click on a focusable element in order to give focus.
+          </p>
+
+          <p> Empty text fields in SVG theoretically take up no space, but
+          they have a point or zero-width line segment that represents the
+          location of the empty text field. <a href="intro.html#TermSVGUserAgent"><span class="svg-term">SVG user agents</span></a> should allow users
+          with pointer devices to put focus into empty text fields by
+          initiating a select action (e.g., a mouse click) at the location
+          of the empty text field.  </p>
+
+          <p>An author may change the field navigation order from a script by using the <a href="svgudom.html#svg__TraitAccess_setTrait"><code>setTrait</code></a> method to change the current value of
+            <a href="intro.html#TermNavigationAttribute"><span class="svg-term">navigation attributes</span></a>
+
+            on a given element (see Example below).</p>
+          <div class="example"><div class="exampleheader"><strong>Example:</strong> changeNavigationOrder.svg</div><div class="examplesource"><pre>&lt;?xml version="1.0"?&gt;
+
+      &lt;svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny"
+           xmlns:ev="http://www.w3.org/2001/xml-events"&gt;
+
+        &lt;desc&gt;An example of how to change the navigation order from script by
+        changing nav-* attribute values. In this example, "myRect2" disappears between 10 and 20 sec 
+        and is replaced by the "myRectNew" rectangle during this period. Consequently, the navigation order 
+        must be changed accordingly during this period and we must re-established initial order after 20s.&lt;/desc&gt;
+
+        &lt;rect xml:id="myRect1" x="10" y="20" width="100" height="50" fill="red" focusable="true" nav-right="url(#myRect2)"&gt;
+              &lt;set begin="focusin" end="focusout" attributeName="fill" to="purple"/&gt;
+        &lt;/rect&gt;
+
+        &lt;rect xml:id="myRect2" x="120" y="20" width="100" height="50" fill="red" focusable="true" 
+              nav-right="url(#myRect3)" nav-left="url(#myRect1)"&gt;
+              &lt;set begin="focusin" end="focusout" attributeName="fill" to="purple"/&gt;
+
+              &lt;set begin="0"  end="10" attributeName="display" to="inline"/&gt;
+              &lt;set begin="10" end="20" attributeName="display" to="none"/&gt;
+              &lt;set begin="20"          attributeName="display" to="inline"/&gt;
+        &lt;/rect&gt;
+        &lt;rect xml:id="myRect3" x="230" y="20" width="100" height="50" fill="red" focusable="true" nav-left="url(#myRect2)"&gt;
+              &lt;set begin="focusin" end="focusout" attributeName="fill" to="purple"/&gt;
+
+        &lt;/rect&gt;
+
+        &lt;rect xml:id="myRectNew" x="120" y="20" width="100" height="50" fill="blue" focusable="true" nav-right="url(#myRect3)" 
+              nav-left="url(#myRect1)" display="none" &gt;
+              &lt;set xml:id="myRectNewFillAnim"    begin="focusin" end="focusout" attributeName="fill"    to="black"/&gt;
+              &lt;set xml:id="myRectNewDisplayAnim" begin="10"      end="20"       attributeName="display" to="inline"/&gt;
+        &lt;/rect&gt;
+
+        &lt;!-- register a listener for myRectNew.beginEvent event --&gt;
+        &lt;ev:listener event="beginEvent" observer="myRectNew" handler="#myAnimationHandler" /&gt;
+        &lt;ev:listener event="endEvent"   observer="myRectNew" handler="#myAnimationHandler" /&gt;
+
+        &lt;!-- handler which is called when myRect2 is replaced by myRectNew --&gt;
+        &lt;handler xml:id="myAnimationHandler" type="application/ecmascript"&gt;&lt;![CDATA[
+          var myRect1 = document.getElementById("myRect1");
+          var myRect3 = document.getElementById("myRect3");
+
+          if (evt.type == "beginEvent" &amp;&amp; evt.target.id == "myRectNewDisplayAnim")
+          {
+              myRect1.setTrait("nav-right", "url(#myRectNew)");
+              myRect3.setTrait("nav-left", "url(#myRectNew)");
+          }
+          else if (evt.type == "endEvent" &amp;&amp; evt.target.id == "myRectNewDisplayAnim")
+          {
+              myRect1.setTrait("nav-right", "url(#myRect2)");
+              myRect3.setTrait("nav-left", "url(#myRect2)");
+          }
+        ]]&gt;&lt;/handler&gt;
+
+      &lt;/svg&gt;
+      </pre></div>
+      
+      
+    </div>
+  </div>
+</div>    
+    
+    <div id="sec-schema">
+      <h2><a id="RelaxNG" href="#RelaxNG">7 RelaxNG Schema for SVG Connector 1.0</a></h2>
+      <p>The schema for SVG Connector 1.0 is written in <a href="http://www.y12.doe.gov/sgml/sc34/document/0362_files/relaxng-is.pdf">RelaxNG</a> [<a href="#ref-RNG">RelaxNG</a>], a namespace-aware schema language that uses the datatypes from <a href="http://www.w3.org/TR/2004/REC-xmlschema-2-20041028/">XML Schema Part 2</a> [<a href="#ref-Schema2">Schema2</a>]. This allows namespaces and modularity to be much more naturally expressed than using DTD syntax. The RelaxNG schema for SVG Filter 1.2 may be imported by other RelaxNG schemas, or combined with other schemas in other languages into a multi-namespace, multi-grammar schema using <a href="http://www.asahi-net.or.jp/~eb2m-mrt/dsdl/">Namespace-based Validation Dispatching Language</a> [<a href="#ref-NVDL">NVDL</a>].</p>
+      <p>Unlike a DTD, the schema used for validation is not hardcoded into the document instance. There is no equivalent to the DOCTYPE declaration. Simply point your editor or other validation tool to the IRI of the schema (or your local cached copy, as you prefer).</p>
+      <p>
+	The RNG is under construction, and only the individual RNG snippets are available at this time. They have not yet been integrated into a functional schema. The individual RNG files are available <a href="rng">here</a>. 
+	</p>
+    </div>
+    
+    
+    <div id="sec-DOMInterfaces">
+      <h2><a id="DOMInterfaces" href="#DOMInterfaces">8 DOM interfaces</a></h2>
+      <div class="note">
+	The interfaces below will be made available in a IDL file for an upcoming draft.
+	</div>
+      <p>The following interfaces are defined below: <a href="#RandomInterface">RandomInterface</a>.</p>
+      <br />
+      <h3><a id="RandomInterface">Interface <span class="DOMInterfaceName" href="#RandomInterface">Interface <span class="DOMInterfaceName">RandomInterface</span></a></h3>
+      <p>The <span class="DOMInterfaceName">RandomInterface</span> interface
+	corresponds to the <span class="element-name">'RandomInterface'</span>
+	element.</p>
+      <dl>
+        <dt>
+          <br />
+          <b>IDL Definition</b>
+        </dt>
+        <dd>
+          <div class="idl-code">
+            <pre>interface RandomInterface : SVGElement { 
+	  readonly attribute InterfaceString foo;
+	};</pre>
+          </div>
+          <br />
+        </dd>
+        <dt>
+          <b>Attributes</b>
+        </dt>
+        <dd>
+          <dl>
+            <dt>
+              <span class="dom-readonly">readonly</span>
+              <span class="dom-attr-type">InterfaceString</span>
+              <span class="dom-attr-name">foo</span>
+            </dt>
+            <dd>Corresponds to attribute <span class="attr-name">bar</span> on the given <span class="element-name">'Random'</span> element.</dd>
+          </dl>
+        </dd>
+      </dl>
+    </div>
+    
+    
+    <div id="sec-refs">
+      <h2><a id="refs" href="#refs">9 References</a></h2>
+      <h3><a id="normrefs" href="#normrefs">9.1 Normative References</a></h3>
+      <dl>
+        <dt id="ref-RFC2119">
+          <strong class="normref">[RFC2119]</strong>
+        </dt>
+        <dd>
+          <cite><a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a></cite>,
+          S. Bradner, March 1997.
+          <br />Available at http://tools.ietf.org/html/rfc2119.
+        </dd>
+
+        <dt id="ref-SVG11">
+          <strong class="normref">[SVG11]</strong>
+        </dt>
+        <dd>
+          <cite class="w3crec"><a href="http://www.w3.org/TR/2003/REC-SVG11-20030114/">Scalable Vector Graphics (SVG) 1.1</a></cite>,
+          J. Ferraiolo, <span class="ruby"><span xml:lang="ja" class="rb" lang="ja">藤沢 淳</span><span class="rp">(</span><span class="rt"><span class="familyname">Fujisawa</span> Jun</span><span class="rp">)</span></span>, D. Jackson, eds.
+          World Wide Web Consortium, 14 January 2003.
+          <br />This edition of SVG 1.1 is http://www.w3.org/TR/2003/REC-SVG11-20030114/.
+          <br />The <a href="http://www.w3.org/TR/SVG11/">latest edition of SVG 1.1</a> is available at
+          http://www.w3.org/TR/SVG11/.
+        </dd>
+
+        <dt id="ref-SVGT12">
+          <strong class="normref">[SVGT12]</strong>
+        </dt>
+        <dd>
+          <cite class="w3crec"><a href="http://www.w3.org/TR/2008/REC-SVGTiny12-20081222/">Scalable Vector Graphics (SVG) Tiny 1.2</a></cite>,
+          O. Andersson, R. Berjon, E. Dahlström, A. Emmons, J. Ferraiolo, A. Grasso, V. Hardy, S. Hayman, D. Jackson, C. Lilley, C. McCormack, A. Neumann, C. Northway, A. Quint, N. Ramani, D. Schepers, A. Shellshear, eds.
+          World Wide Web Consortium, 22 December 2008.
+          <br />This edition of SVG Tiny 1.2 is http://www.w3.org/TR/2008/REC-SVGTiny12-20081222/.
+          <br />The <a href="http://www.w3.org/TR/SVGTiny12/">latest edition of SVG Tiny 1.2</a> is available at
+          http://www.w3.org/TR/SVGTiny12/.
+        </dd>
+      </dl>
+
+
+      <h3><a id="informrefs" href="#informrefs">9.2 Informative References</a></h3>
+      <dl>
+        <dt id="ref-GML">
+          <strong class="informref">[DOT]</strong>
+        </dt>
+        <dd>
+          <cite class="documentations"><a href="http://www.graphviz.org/doc/info/lang.html">The DOT Language</a></cite>.
+          Graphviz Open-Source Graph Visualization Software documentations, AT&T.
+          <br />This edition of The DOT Language is http://www.graphviz.org/doc/info/lang.html.
+        </dd>
+
+        <dt id="ref-GML">
+          <strong class="informref">[GML]</strong>
+        </dt>
+        <dd>
+          <cite class="academic"><a href="http://www.infosun.fim.uni-passau.de/Graphlet/GML/gml-tr.html">GML: A portable Graph File Format</a></cite>.
+          M. Himsolt, ed.,
+          Universität Passau, 20 July 1997.
+          <br />This edition of GML is http://www.infosun.fim.uni-passau.de/Graphlet/GML/gml-tr.html.
+        </dd>
+
+        <dt id="ref-GraphML">
+          <strong class="informref">[GraphML]</strong>
+        </dt>
+        <dd>
+          <cite class="academic"><a href="http://graphml.graphdrawing.org/specification.html">GraphML Progress Report: Structural Layer Proposal</a></cite>.
+          U. Brandes, M. Eiglsperger, I. Herman, M. Himsolt, and M.S. Marshall, eds.,
+          Proc. 9th Intl. Symp. Graph Drawing (GD '01), LNCS 2265, pp. 501-512, Springer-Verlag, 2002.
+          <br />This edition of the GraphML Progress Report is http://graphml.graphdrawing.org/specification.html.
+        </dd>
+
+        <dt id="ref-GXL">
+          <strong class="informref">[GXL]</strong>
+        </dt>
+        <dd>
+          <cite class="academic"><a href="http://www.gupro.de/GXL/Introduction/intro.html">GXL: A Graph-Based Standard Exchange Format for Reengineering</a></cite>.
+          R. Holt, A. Schürr, S. Elliott Sim, A. Winter, eds.,
+          17 July 2002.
+          <br />This edition of the GXL specification is http://www.gupro.de/GXL/Introduction/intro.html.
+        </dd>
+
+        <dt id="ref-NVDL">
+          <strong class="informref">[NVDL]</strong>
+        </dt>
+        <dd>
+          <cite><a href="http://www.jtc1sc34.org/repository/0694.pdf">Information Technology — Document Schema Definition Languages (DSDL) — Part 4: Namespace-based Validation Dispatching Language</a></cite>: ISO/IEC FDIS 19757-4:2005(E),
+          International Organization for Standardization, December 2005.
+          <br />Available at http://www.jtc1sc34.org/repository/0694.pdf.
+        </dd>
+
+        <dt id="ref-RDF"><strong class="informref">[RDF]</strong></dt>
+        <dd>
+          <cite class="w3crec"><a href="http://www.w3.org/TR/2004/REC-rdf-primer-20040210/">RDF Primer</a></cite>,
+          F. Manola, E. Miller, eds.
+          World Wide Web Consortium, 10 February 2004.
+          <br />This edition of RDF Primer is http://www.w3.org/TR/2004/REC-rdf-primer-20040210/.
+          <br />The <a href="http://www.w3.org/TR/rdf-primer/">latest edition of RDF Primer</a> is available at
+          http://www.w3.org/TR/rdf-primer/.
+        </dd>
+
+        <dt id="ref-RDFa"><strong class="informref">[RDFA]</strong></dt>
+        <dd>
+          <cite class="w3cpr"><a href="http://www.w3.org/TR/2008/PR-rdfa-syntax-20080904/">RDFa in XHTML: Syntax and Processing</a></cite>,
+          B. Adida, M. Birbeck, S. McCarron, S. Pemberton, eds.
+          World Wide Web Consortium, <span class="wip">work in progress</span>, 04 September 2008.
+          <br />This edition of RDFa Syntax is http://www.w3.org/TR/2008/PR-rdfa-syntax-20080904/.
+          <br />The <a href="http://www.w3.org/TR/rdfa-syntax/">latest edition of RDFa Syntax</a> is available at
+          http://www.w3.org/TR/rdfa-syntax/.
+          <br />An <a href="http://www.w3.org/TR/xhtml-rdfa-primer/">RDFa Primer</a> is also available at
+          http://www.w3.org/TR/xhtml-rdfa-primer/.
+        </dd>
+        
+        <dt id="ref-ROLE"><strong class="informref">[ROLE]</strong></dt>
+        <dd>
+          <cite class="w3cwd"><a href="http://www.w3.org/TR/2008/WD-xhtml-role-20080407/">XHTML Role Attribute Module</a></cite>,
+          M. Birbeck, S. McCarron, S. Pemberton, T. V. Raman, R. Schwerdtfeger, eds.
+          World Wide Web Consortium, <span class="wip">work in progress</span>, 07 April 2008.
+          <br />This edition of RDFa Syntax is http://www.w3.org/TR/2008/PR-rdfa-syntax-20080904/.
+          <br />The <a href="http://www.w3.org/TR/xhtml-role/">latest edition of the XHTML Role Attribute Module</a> is available at
+          http://www.w3.org/TR/xhtml-role/.
+        </dd>
+        
+        <dt id="ref-SCHEMA2">
+          <strong class="informref">[SCHEMA2]</strong>
+        </dt>
+        <dd>
+          <cite class="w3crec"><a href="http://www.w3.org/TR/2004/REC-xmlschema-2-20041028/">XML Schema Part 2: Datatypes Second Edition</a></cite>.
+          P. Biron, A. Malhotra, eds.
+          World Wide Web Consortium, 28 October 2004.
+          (See also <a href="http://www.w3.org/TR/2005/NOTE-xml11schema10-20050511/"><cite>Processing XML 1.1 documents with XML Schema 1.0 processors</cite></a>
+          [<a href="#ref-XML11-SCHEMA">XML11-SCHEMA</a>].)
+          <br />This edition of XML Schema Part 2 is http://www.w3.org/TR/2004/REC-xmlschema-2-20041028/.
+          <br />The <a href="http://www.w3.org/TR/xmlschema-2/">latest edition of XML Schema Part 2</a> is available at
+          http://www.w3.org/TR/xmlschema-2/.
+        </dd>
+        
+        <dt id="ref-WebSchematics">
+          <strong class="informref">[WebSchematics]</strong>
+        </dt>
+        <dd>
+          <cite class="w3cnote"><a href="http://www.w3.org/TR/1998/NOTE-WebSchematics-19980331/">Web Schematics on the World Wide Web</a></cite>.
+          D. Duce, ed.
+          World Wide Web Consortium Note, 31 March 1998.
+          <br />This edition of Web Schematics is http://www.w3.org/TR/1998/NOTE-WebSchematics-19980331/.
+          <br />The <a href="http://www.w3.org/TR/1998/NOTE-WebSchematics">latest edition of Web Schematics</a> is available at
+          http://www.w3.org/TR/1998/NOTE-WebSchematics.
+        </dd>
+
+        <dt id="ref-XGMML">
+          <strong class="informref">[XGMML]</strong>
+        </dt>
+        <dd>
+          <cite class="academic"><a href="http://www.cs.rpi.edu/~puninj/XGMML/draft-xgmml-20010628.html">XGMML (eXtensible Graph Markup and Modeling Language) 1.0 Draft Specification</a></cite>.
+          J. Punin, M. Krishnamoorthy, eds.
+          Rensselaer Polytechnic Institute, 28 June 2001.
+          <br />This edition of XGMML 1.0 is http://www.cs.rpi.edu/~puninj/XGMML/draft-xgmml-20010628.html.
+          <br />The <a href="http://www.cs.rpi.edu/~puninj/XGMML/draft-xgmml.html">latest edition of XGMML 1.0</a> is available at
+          http://www.cs.rpi.edu/~puninj/XGMML/draft-xgmml.html.
+        </dd>
+
+        <dt id="ref-XSLT"><strong class="informref">[XSLT]</strong></dt>
+        <dd>
+          <cite class="w3crec"><a href="http://www.w3.org/TR/1999/REC-xslt-19991116">XSL Transformations (XSLT) Version 1.0</a></cite>,
+          J. Clark, ed.
+          World Wide Web Consortium, 16 November 1999.
+          <br />This edition of XSLT 1.0 is http://www.w3.org/TR/1999/REC-xslt-19991116.
+          <br />The <a href="http://www.w3.org/TR/xslt">latest edition of XSLT 1.0</a> is available at
+          http://www.w3.org/TR/xslt.
+        </dd>
+
+      </dl>
+    </div>
+    <div>
+      <h2><a id="Acknowledgments" href="#Acknowledgments">10 Acknowledgments</a></h2>
+      <p>
+    The editors would like to acknowledge and thank the following
+    people for substantive aid with this specification: Andrew Shellshear, David Dailey, Cyril Concolato, Erik Dahlström, Jonathan Watt, Anthony Grasso, Chris Lilley.
+  </p>
+    </div>
+  </body>
+</html>
